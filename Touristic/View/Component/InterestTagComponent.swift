@@ -2,7 +2,11 @@ import SwiftUI
 
 struct InterestTagComponent: View {
     let interest: String
-    @State var selected: Bool = false
+    @Binding var selectedInterests: [String]
+    
+    var isSelected: Bool {
+        selectedInterests.contains(interest)
+    }
     
     var body: some View {
         Button(
@@ -11,15 +15,21 @@ struct InterestTagComponent: View {
             }
         ) {
             Text(interest)
-                .foregroundColor(selected ? .white : .primary)
+                .foregroundColor(isSelected ? .white : .primary)
         }
         .padding(.vertical, 5)
         .padding(.horizontal, 22)
-        .background(selected ? Color.cyan : Color(.systemGray5))
+        .background(isSelected ? Color.accentColor : Color(.systemGray5))
         .clipShape(Capsule())
     }
     
     func toggleSelected() {
-        selected.toggle()
+        if isSelected {
+            selectedInterests.removeAll(where: { $0 == interest })
+        } else {
+            if selectedInterests.count < 5 {
+                selectedInterests.append(interest)
+            }
+        }
     }
 }

@@ -27,28 +27,62 @@ let tagList = [
 ]
 
 struct OnBoardingView: View {
+    @State private var selectedInterests: [String] = []
+    
     var body: some View {
-        NavigationStack()  {
-            VStack {
+        NavigationStack() {
+            VStack(alignment: .leading) {
+                Text("Select up to 5")
+                    .multilineTextAlignment(.leading)
+                    .font(.headline)
                 WrappingHStack(models: tagList, viewGenerator: { tag in
                     InterestTagComponent(
-                        interest: tag.name
+                        interest: tag.name,
+                        selectedInterests: $selectedInterests
                     )
                 })
                 .horizontalSpacing(6)
                 .verticalSpacing(6)
+                
                 Spacer()
+                
+                Button(
+                    action: {
+                        // TODO: Perform action when "Next" button is tapped
+                        print(selectedInterests)
+                    }
+                ) {
+                    Spacer()
+                    Text("Next")
+                    Spacer()
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(selectedInterests.isEmpty || selectedInterests.count > 5)
+                
+                HStack {
+                    Spacer()
+                    Button(
+                        action: {
+                            // TODO: Perform action when "Skip to Explore" button is tapped
+                        }
+                    ) {
+                        Text("Skip to Explore")
+                            .underline()
+                            .italic()
+                    }
+                    .buttonStyle(.automatic)
+                    Spacer()
+                }
+                
             }
-            .padding(.top, 50)
+            .padding(.vertical, 50)
             .padding(.horizontal, 20)
-            .navigationTitle(
-                "Choose Your Interest"
-            )
+            .navigationTitle("Choose Your Interest")
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct OnBoardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnBoardingView()
     }
