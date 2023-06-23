@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21DDA1542A459B9A00048135 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA1532A459B9A00048135 /* TabBarView.swift */; };
+		21DDA1562A459CAA00048135 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA1552A459CAA00048135 /* ExploreView.swift */; };
+		21DDA1582A459E3500048135 /* NewTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA1572A459E3500048135 /* NewTripView.swift */; };
 		7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */; };
 		7D60C4A62A444D8000BFB6B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A52A444D8000BFB6B6 /* ContentView.swift */; };
 		7D60C4A82A444D8200BFB6B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21DDA1532A459B9A00048135 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		21DDA1552A459CAA00048135 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		21DDA1572A459E3500048135 /* NewTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripView.swift; sourceTree = "<group>"; };
 		7D60C4A02A444D8000BFB6B6 /* Touristic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touristic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristicApp.swift; sourceTree = "<group>"; };
 		7D60C4A52A444D8000BFB6B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,9 +57,12 @@
 		7D60C4A22A444D8000BFB6B6 /* Touristic */ = {
 			isa = PBXGroup;
 			children = (
-				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
+				21DDA1532A459B9A00048135 /* TabBarView.swift */,
+				21DDA1552A459CAA00048135 /* ExploreView.swift */,
 				7D60C4A52A444D8000BFB6B6 /* ContentView.swift */,
+				21DDA1572A459E3500048135 /* NewTripView.swift */,
 				7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */,
+				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
 				7D60C4A92A444D8200BFB6B6 /* Preview Content */,
 			);
 			path = Touristic;
@@ -137,7 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21DDA1582A459E3500048135 /* NewTripView.swift in Sources */,
 				7D60C4A62A444D8000BFB6B6 /* ContentView.swift in Sources */,
+				21DDA1542A459B9A00048135 /* TabBarView.swift in Sources */,
+				21DDA1562A459CAA00048135 /* ExploreView.swift in Sources */,
 				7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
