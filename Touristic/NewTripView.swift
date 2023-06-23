@@ -17,29 +17,36 @@ struct NewTripView: View {
                 TextField("Trip Name",text: $TripName)
                     .padding()
                     .textFieldStyle(.roundedBorder)
-                
-//                    (Color(UIColor.systemGray6))
+                Button(action:{
+                    
+                }){
+                    Spacer()
+                    Text("Create Trip!")
+                    Spacer()
+                }
+                .buttonStyle(.borderedProminent)
+                .padding(.horizontal)
             }
             .navigationBarTitle("Trip", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action:{
                         dismiss()
-                    },label:{
+                    }){
                         Text("Cancel")
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
-                    })
+                    }
                     
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action:{
                         
-                    },label:{
+                    }){
                         Text("Done")
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
-                    })
+                    }
                     
                 }
                 
