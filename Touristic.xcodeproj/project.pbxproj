@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DB92A496F5E00843298 /* PinnedView.swift */; };
+		7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBB2A496F8F00843298 /* TabBarView.swift */; };
+		7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBC2A496F8F00843298 /* ExploreView.swift */; };
+		7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBD2A496F8F00843298 /* NewTripView.swift */; };
 		7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */; };
 		7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */; };
 		7D60C4A82A444D8200BFB6B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */; };
@@ -17,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D0D9DB92A496F5E00843298 /* PinnedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinnedView.swift; sourceTree = "<group>"; };
+		7D0D9DBB2A496F8F00843298 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		7D0D9DBC2A496F8F00843298 /* ExploreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		7D0D9DBD2A496F8F00843298 /* NewTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTripView.swift; sourceTree = "<group>"; };
 		7D60C4A02A444D8000BFB6B6 /* Touristic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touristic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristicApp.swift; sourceTree = "<group>"; };
 		7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
@@ -59,7 +67,6 @@
 			children = (
 				7D60C4B72A445E6F00BFB6B6 /* Model */,
 				7D60C4B12A4454FD00BFB6B6 /* View */,
-				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
 				7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */,
 				7D60C4A92A444D8200BFB6B6 /* Preview Content */,
 			);
@@ -77,6 +84,11 @@
 		7D60C4B12A4454FD00BFB6B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
+				7D0D9DBC2A496F8F00843298 /* ExploreView.swift */,
+				7D0D9DBD2A496F8F00843298 /* NewTripView.swift */,
+				7D0D9DBB2A496F8F00843298 /* TabBarView.swift */,
+				7D0D9DB92A496F5E00843298 /* PinnedView.swift */,
 				7D60C4B22A4455CA00BFB6B6 /* Component */,
 				7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */,
 			);
@@ -172,8 +184,12 @@
 			files = (
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
 				7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */,
+				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
+				7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */,
+				7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */,
 				7D60C4B92A445E7C00BFB6B6 /* TagModel.swift in Sources */,
 				7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */,
+				7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */,
 				7D60C4B42A4456B300BFB6B6 /* InterestTagComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

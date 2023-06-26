@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct PinnedView: View {
     @State private var searchText = ""
     @State private var isShowingModalNewTrip = false
     var body: some View {
@@ -42,6 +42,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        PinnedView()
     }
 }

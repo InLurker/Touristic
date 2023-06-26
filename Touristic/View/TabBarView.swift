@@ -13,7 +13,7 @@ struct TabBarView: View {
             ExploreView().tabItem{
                 Label("Explore", systemImage: "safari")
             }
-            ContentView().tabItem{
+            PinnedView().tabItem{
                 Label("Pinned", systemImage: "pin")
             }
         }
