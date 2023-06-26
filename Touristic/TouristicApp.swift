@@ -13,10 +13,10 @@ struct TouristicApp: App {
     var body: some Scene {
         WindowGroup {
             if(isOnBoardingCompleted) {
-                OnBoardingView()
+                TabBarView()
             } 
             else {
-                TabBarView()
+                OnBoardingView()
             }
         }
     }
