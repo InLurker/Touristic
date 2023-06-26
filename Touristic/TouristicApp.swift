@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct TouristicApp: App {
+    @AppStorage("isOnBoardingCompleted") var isOnBoardingCompleted: Bool = false
     var body: some Scene {
         WindowGroup {
-            if(true) {
+            if(isOnBoardingCompleted) {
                 OnBoardingView()
             } 
             else {

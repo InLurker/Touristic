@@ -58,14 +58,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		21DDA1652A49761000048135 /* View Inside TabBar */ = {
+		21DDA1652A49761000048135 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
 				7D0D9DBC2A496F8F00843298 /* ExploreView.swift */,
 				7D0D9DB92A496F5E00843298 /* PinnedView.swift */,
 				21DDA15D2A49754200048135 /* TripActivityView.swift */,
 			);
-			path = "View Inside TabBar";
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		21DDA1662A4976ED00048135 /* Modal */ = {
@@ -116,7 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				7D0D9DBB2A496F8F00843298 /* TabBarView.swift */,
-				21DDA1652A49761000048135 /* View Inside TabBar */,
+				21DDA1652A49761000048135 /* TabBar */,
 				21DDA1662A4976ED00048135 /* Modal */,
 				7D60C4B22A4455CA00BFB6B6 /* Component */,
 				7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */,
