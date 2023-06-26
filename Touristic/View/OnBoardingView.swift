@@ -27,8 +27,9 @@ let tagList = [
 ]
 
 struct OnBoardingView: View {
+    @AppStorage("isOnBoardingCompleted") var isOnBoardingCompleted: Bool = false
+
     @State private var selectedInterests: [String] = []
-    
     var body: some View {
         NavigationStack() {
             VStack(alignment: .leading) {
@@ -48,8 +49,7 @@ struct OnBoardingView: View {
                 
                 Button(
                     action: {
-                        // TODO: Perform action when "Next" button is tapped
-                        print(selectedInterests)
+                        isOnBoardingCompleted = true
                     }
                 ) {
                     Spacer()
@@ -63,7 +63,7 @@ struct OnBoardingView: View {
                     Spacer()
                     Button(
                         action: {
-                            // TODO: Perform action when "Skip to Explore" button is tapped
+                            isOnBoardingCompleted = true
                         }
                     ) {
                         Text("Skip to Explore")
