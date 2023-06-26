@@ -10,6 +10,7 @@ import SwiftUI
 struct NewTripView: View {
     @Environment(\.dismiss) var dismiss
     @State private var TripName = ""
+    private var TripList = TripNameSet.shared
     var body: some View {
         NavigationStack{
             VStack {
@@ -18,7 +19,9 @@ struct NewTripView: View {
                     .padding()
                     .textFieldStyle(.roundedBorder)
                 Button(action:{
-                    
+                    TripList.tripNameSet.append(TripName)
+                    print(TripList)
+                    dismiss()
                 }){
                     Spacer()
                     Text("Create Trip!")

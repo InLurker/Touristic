@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA15D2A49754200048135 /* TripActivityView.swift */; };
+		21DDA1602A49754200048135 /* TripNameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA15E2A49754200048135 /* TripNameData.swift */; };
 		7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DB92A496F5E00843298 /* PinnedView.swift */; };
 		7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBB2A496F8F00843298 /* TabBarView.swift */; };
 		7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBC2A496F8F00843298 /* ExploreView.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21DDA15D2A49754200048135 /* TripActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripActivityView.swift; sourceTree = "<group>"; };
+		21DDA15E2A49754200048135 /* TripNameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripNameData.swift; sourceTree = "<group>"; };
 		7D0D9DB92A496F5E00843298 /* PinnedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinnedView.swift; sourceTree = "<group>"; };
 		7D0D9DBB2A496F8F00843298 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		7D0D9DBC2A496F8F00843298 /* ExploreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
@@ -46,6 +50,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21DDA1632A4975B600048135 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				21DDA15E2A49754200048135 /* TripNameData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		21DDA1652A49761000048135 /* View Inside TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				7D0D9DBC2A496F8F00843298 /* ExploreView.swift */,
+				7D0D9DB92A496F5E00843298 /* PinnedView.swift */,
+				21DDA15D2A49754200048135 /* TripActivityView.swift */,
+			);
+			path = "View Inside TabBar";
+			sourceTree = "<group>";
+		};
+		21DDA1662A4976ED00048135 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				7D0D9DBD2A496F8F00843298 /* NewTripView.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		7D60C4972A444D8000BFB6B6 = {
 			isa = PBXGroup;
 			children = (
@@ -85,10 +115,9 @@
 		7D60C4B12A4454FD00BFB6B6 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				7D0D9DBC2A496F8F00843298 /* ExploreView.swift */,
-				7D0D9DBD2A496F8F00843298 /* NewTripView.swift */,
 				7D0D9DBB2A496F8F00843298 /* TabBarView.swift */,
-				7D0D9DB92A496F5E00843298 /* PinnedView.swift */,
+				21DDA1652A49761000048135 /* View Inside TabBar */,
+				21DDA1662A4976ED00048135 /* Modal */,
 				7D60C4B22A4455CA00BFB6B6 /* Component */,
 				7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */,
 			);
@@ -107,6 +136,7 @@
 		7D60C4B72A445E6F00BFB6B6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21DDA1632A4975B600048135 /* Data */,
 				7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */,
 			);
 			path = Model;
@@ -182,8 +212,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
 				7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */,
+				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
 				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
 				7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */,
 				7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */,
