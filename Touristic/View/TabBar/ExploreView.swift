@@ -8,8 +8,32 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @State var searchQuery = ""
+    @State var isShowingFilterModal : Bool = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            VStack{
+                Text("hello")
+            }
+            .navigationTitle("Explore")
+            .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Activities Name") {        }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        isShowingFilterModal = true
+                        // Handle filter button tap
+                    }) {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingFilterModal) {
+                FilterInterestModal()
+
+            }
+
+        }
+        
     }
 }
 
