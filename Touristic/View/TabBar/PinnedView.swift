@@ -38,7 +38,7 @@ struct PinnedView: View {
                                             .padding(.horizontal,10)
                                             Spacer()
                                         }
-                                            .padding(.horizontal,10)
+                                        .padding(.horizontal,10)
                                     )
                                     .padding(.horizontal,25)
                                     .padding(.top,14)
