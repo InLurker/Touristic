@@ -11,7 +11,12 @@ import SwiftUI
 struct TouristicApp: App {
     var body: some Scene {
         WindowGroup {
-            OnBoardingView()
+            if(true) {
+                OnBoardingView()
+            } 
+            else {
+                TabBarView()
+            }
         }
     }
 }
