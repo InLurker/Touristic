@@ -11,7 +11,7 @@ import SwiftUI
 struct TouristicApp: App {
     var body: some Scene {
         WindowGroup {
-            if(true) {
+            if(false) {
                 OnBoardingView()
             } 
             else {

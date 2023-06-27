@@ -55,7 +55,6 @@ struct PinnedView: View {
                     print(TripList)
                 },label:{
                     Image(systemName: "plus")
-                        .font(.custom("", size: 25))
                         .foregroundColor(Color.accentColor)
                         .padding(.horizontal)
                 })
