@@ -50,6 +50,10 @@ struct FilterInterestModal: View {
                             .font(.caption)
                         Image(systemName: "mappin.and.ellipse")
                     }
+
+                    .onTapGesture {
+                        dismiss()
+                    }
                     .foregroundColor(.blue)
                 }
                 

@@ -20,7 +20,7 @@ struct PinnedView: View {
                 }
                 else{
                     ScrollView{
-                        ForEach(TripList.tripNameSet, id: \.self){trips in
+                        ForEach(searchResultTripList, id: \.self){trips in
                             NavigationLink(destination: TripActivityView()){
                                 RoundedRectangle(cornerRadius: 10)
                                     .foregroundColor(Color(UIColor.systemGray6))
@@ -40,11 +40,12 @@ struct PinnedView: View {
                                         }
                                         .padding(.horizontal,10)
                                     )
-                                    .padding(.horizontal,25)
-                                    .padding(.top,14)
+                                    .padding(.bottom,14)
                             }
                             .foregroundColor(.black)
                         }
+                        .padding(.vertical, 25)
+                        .padding(.horizontal,25)
                     }
                 }
             }
@@ -69,7 +70,16 @@ struct PinnedView: View {
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+
     }
+    var searchResultTripList: [String] {
+        if searchText.isEmpty{
+            return TripList.tripNameSet
+        }else {
+            return TripList.tripNameSet.filter { $0.lowercased().contains(searchText) }
+        }
+    }
+
 }
 
 
