@@ -52,9 +52,7 @@ struct FilterInterestModal: View {
                     }
                     .onTapGesture {
                         dismiss()
-                    }
-
-                    .foregroundColor(.blue)
+                    }                    .foregroundColor(.blue)
                 }
                 
                 TextField("Search Location", text: $destination)
