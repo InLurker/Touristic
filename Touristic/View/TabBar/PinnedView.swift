@@ -11,44 +11,45 @@ struct PinnedView: View {
     @State private var searchText = ""
     @State private var isShowingModalNewTrip = false
     @ObservedObject private var TripList = TripNameSet.shared
+    
+    @State private var searchResultTripList = ["Trip 1", "Trip 2", "Trip 3", "Trip 4", "Trip 5", "Trip 6", "Trip 7", "Trip 9", "Trip 10"]
+    
     var body: some View {
         NavigationStack(){
-            VStack{
-                if TripList.tripNameSet.count < 1{
+            List {
+                if fitleredTripList.count < 1{
                     Text("You don’t have any pinned explore yet.\nAdd by click '+' icon in the right top corner.")
                         .multilineTextAlignment(.center)
                 }
-                else{
-                    ScrollView{
-                        ForEach(searchResultTripList, id: \.self){trips in
-                            NavigationLink(destination: TripActivityView()){
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color(UIColor.systemGray6))
-                                    .frame(height: 81)
-                                    .overlay(
-                                        HStack{
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .frame(width:59,height: 59)
-                                                .foregroundColor(.white)
-                                            
-                                            VStack(alignment:.leading){
-                                                Text("\(trips)")
-                                                Text("0 Activty")
-                                            }
-                                            .padding(.horizontal,10)
-                                            Spacer()
-                                        }
-                                        .padding(.horizontal,10)
-                                    )
-                                    .padding(.bottom,14)
+                else {
+                    Section {
+                        ForEach(fitleredTripList, id: \.self) { trip in
+                            NavigationLink(destination: TripActivityView()) {
+                                HStack {
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 60, height: 60)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .clipped()
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(trip)
+                                        Text("0 Activity")
+                                    }
+                                    .padding(.horizontal, 10)
+                                    Spacer()
+                                }
+                                .padding(.vertical, 14)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
-                            .foregroundColor(.black)
                         }
-                        .padding(.vertical, 25)
-                        .padding(.horizontal,25)
+                        .onDelete(perform: deleteTrip)
                     }
+                header: { Text("") }
                 }
             }
+            .listStyle(.insetGrouped)
             .navigationTitle("Pinned")
             .toolbar{
                 Button(action:{
@@ -56,7 +57,6 @@ struct PinnedView: View {
                     print(TripList)
                 },label:{
                     Image(systemName: "plus")
-                        .font(.custom("", size: 25))
                         .foregroundColor(Color.accentColor)
                         .padding(.horizontal)
                 })
@@ -70,16 +70,20 @@ struct PinnedView: View {
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
-
+        
     }
-    var searchResultTripList: [String] {
-        if searchText.isEmpty{
-            return TripList.tripNameSet
-        }else {
-            return TripList.tripNameSet.filter { $0.lowercased().contains(searchText) }
+    
+    var fitleredTripList: [String] {
+        if searchText.isEmpty {
+            return searchResultTripList
+        } else {
+            return searchResultTripList.filter { $0.lowercased().contains(searchText) }
         }
     }
-
+    
+    func deleteTrip(at offsets: IndexSet) {
+        searchResultTripList.remove(atOffsets: offsets)
+    }
 }
 
 
