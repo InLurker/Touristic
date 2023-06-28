@@ -118,6 +118,7 @@ struct PlacesCardView: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(height: geometry.size.height)
+                            .frame(width: geometry.size.width)
                             .blur(radius: 4.0)
                             .cornerRadius(10)
                             .opacity(0.4)
@@ -144,6 +145,7 @@ struct PlacesCardView: View {
                 
             }
         }
+//        .padding(.horizontal,25)
     }
 }
 
