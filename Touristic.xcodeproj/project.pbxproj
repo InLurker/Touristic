@@ -21,6 +21,7 @@
 		7D60C4B42A4456B300BFB6B6 /* InterestTagComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B32A4456B300BFB6B6 /* InterestTagComponent.swift */; };
 		7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */; };
 		7D60C4B92A445E7C00BFB6B6 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */; };
+		7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		7D60C4B32A4456B300BFB6B6 /* InterestTagComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestTagComponent.swift; sourceTree = "<group>"; };
 		7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		DDA005922A499D510016476B /* FilterInterestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterestModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
+				7DE43E0D2A4C1E6800A33892 /* Repository */,
 				7D60C4B72A445E6F00BFB6B6 /* Model */,
 				7D60C4B12A4454FD00BFB6B6 /* View */,
 				7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */,
@@ -146,6 +149,14 @@
 				7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7DE43E0D2A4C1E6800A33892 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 			files = (
 				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
 				DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */,
+				7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */,
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
 				7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */,
 				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
