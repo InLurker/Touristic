@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct PlacesCardView: View {
-    let interests = ["Picnic", "Local", "Spiritual"]
+    var interests : [String] = ["yaya", "okeo"]
+    var name : String = ""
+    var images : [String] = [""]
+    @State var clicked = true
+    @State var pinIcon = "pin"
     
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
                 HStack(alignment: .center){
-                    Text("Place name")
+                    Text("\(name)")
                         .lineLimit(1)
                         .font(.headline)
                     Spacer()
@@ -28,35 +32,116 @@ struct PlacesCardView: View {
                         .lineLimit(1)
                         .font(.footnote)
                         .bold()
+                    Button(
+                        action:{
+                            clicked = !clicked
+                            pinIcon = clicked ? "pin" : "pin.fill"
+                        })
+                    {
+                        Image(systemName: pinIcon)
+                            .foregroundColor(.blue)
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, 13)
                 .padding(.horizontal, 9)
+                
                 Text(interests.joined(separator: " · "))
                     .lineLimit(1)
                     .font(.caption)
                     .padding(.horizontal, 9)
                     .padding(.bottom, 5)
                 Spacer()
-                Image(systemName: "photo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(
-                        height: 120,
-                        alignment: .center
-                    )
-                    .cornerRadius(10)
-                    .clipped()
+                AsyncImage(url: URL(string: images[0])) { phase in
+                    switch phase {
+                    case .empty:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(
+                                height: 120,
+                                alignment: .center
+                            )
+                            .clipped()
+                            .cornerRadius(10)
+                    case .success(let image):
+                        image.resizable()
+                            
+                            .aspectRatio(contentMode: .fill)
+                            .frame(
+                                height: 120,
+                                alignment: .center
+                            )
+                           
+                            .cornerRadius(10)
+                            .clipped()
+                            
+                    case .failure:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(
+                                height: 120,
+                                alignment: .center
+                            )
+                            .cornerRadius(10)
+                            .clipped()
+                    @unknown default:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(
+                                height: 120,
+                                alignment: .center
+                            )
+                            .cornerRadius(10)
+                            .clipped()
+                        
+                    }
+                }
+                
             }
             .padding(5)
             GeometryReader { geometry in
-                Image(systemName: "photo")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: geometry.size.height)
-                    .cornerRadius(10)
-                    .opacity(0.4)
-                    .clipped()
+                AsyncImage(url: URL(string: images[0])) { phase in
+                    switch phase {
+                    case .empty:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: geometry.size.height)
+                            .blur(radius: 4.0)
+                            .cornerRadius(10)
+                            .opacity(0.4)
+                            .clipped()
+                    case .success(let image):
+                        image.resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: geometry.size.height)
+                            .blur(radius: 4.0)
+                            .cornerRadius(10)
+                            .opacity(0.4)
+                            .clipped()
+                    case .failure:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: geometry.size.height)
+                            .cornerRadius(10)
+                            .opacity(0.4)
+                            .clipped()
+                    @unknown default:
+                        Image(systemName: "photo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: geometry.size.height)
+                            .cornerRadius(10)
+                            .opacity(0.4)
+                            .clipped()
+                        
+                    }
+                }
+                
             }
         }
     }

@@ -16,6 +16,7 @@ struct PlaceAdapter: Codable {
     let latitude: Double
     let longitude: Double
     let interest: [String]
+    let images: [String]
 }
 
 struct PlaceResponse: Codable {
@@ -51,8 +52,7 @@ func getPlacesByInterest(completion: @escaping (Result<[PlaceAdapter], Error>) -
             completion(.success(response.data))
         } catch {
             completion(.failure(error))
-        }
-    }.resume()
+        }    }.resume()
 }
 
 struct GetAPITest: View {

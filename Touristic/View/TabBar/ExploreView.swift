@@ -10,12 +10,16 @@ import SwiftUI
 struct ExploreView: View {
     @State var searchQuery = ""
     @State var isShowingFilterModal : Bool = false
+    @State var places: [PlaceAdapter] = []
+    
     var body: some View {
+        
         NavigationStack{
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 14){
-                    ForEach(0..<10) { _ in
-                        PlacesCardView()
+                    ForEach(places, id: \.place_id) { place in
+                        
+                        PlacesCardView(interests: place.interest, name: place.name, images: place.images)
                     }
                 }
                 .padding(.vertical, 14)
@@ -39,7 +43,19 @@ struct ExploreView: View {
                 
             }
         }
+        .onAppear {
+            getPlacesByInterest { result in
+                switch result {
+                case .success(let place):
+                    places = place
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+        
     }
+    
 }
 
 struct ExploreView_Previews: PreviewProvider {
