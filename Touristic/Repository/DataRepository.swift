@@ -11,14 +11,11 @@ import CoreData
 
 
 class DataRepository {
-    private let context: NSManagedObjectContext
     
-    init(context: NSManagedObjectContext) {
-        self.context = context
-    }
+    static let shared = DataRepository()
     
-    func createTrip(tripName: String) -> Bool {
-        let trip = Trips(context: context)
+    func createTrip(context: NSManagedObjectContext, tripName: String) -> Bool {
+        let trip = Trip(context: context)
         trip.name = tripName
         
         do {
@@ -30,7 +27,7 @@ class DataRepository {
         }
     }
     
-    func removeTrip(trip: Trips) -> Bool {
+    func removeTrip(context: NSManagedObjectContext, trip: Trip) -> Bool {
         context.delete(trip)
         
         do {
@@ -42,7 +39,7 @@ class DataRepository {
         }
     }
     
-    func addPlaceToTrip(trip: Trips, placeID: String) -> Bool {
+    func addPlaceToTrip(context: NSManagedObjectContext, trip: Trip, placeID: String) -> Bool {
         let place = Place(context: context)
         place.place_id = placeID
         
@@ -56,7 +53,7 @@ class DataRepository {
         }
     }
     
-    func removePlaceFromTrip(trip: Trips, placeID: String) -> Bool {
+    func removePlaceFromTrip(context: NSManagedObjectContext, trip: Trip, placeID: String) -> Bool {
         guard let places = trip.places as? Set<Place> else {
             print("Error removing place from trip: Invalid places set")
             return false
@@ -79,7 +76,7 @@ class DataRepository {
         return false
     }
     
-    func isPlaceInTrip(trip: Trips, placeID: String) -> Bool {
+    func isPlaceInTrip(context: NSManagedObjectContext, trip: Trip, placeID: String) -> Bool {
         guard let places = trip.places as? Set<Place> else {
             print("Error checking place in trip: Invalid places set")
             return false
@@ -88,7 +85,7 @@ class DataRepository {
         return places.contains { $0.place_id == placeID }
     }
     
-    func isPlacePinned(placeID: String) -> Bool {
+    func isPlacePinned(context: NSManagedObjectContext, placeID: String) -> Bool {
         let fetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "place_id == %@", placeID)
         

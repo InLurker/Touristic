@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct PinnedView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(
+        entity: Trip.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Trip.objectID, ascending: true)
+        ]
+    ) var trips: FetchedResults<Trip>
+    
     @State private var searchText = ""
     @State private var isShowingModalNewTrip = false
-    @ObservedObject private var TripList = TripNameSet.shared
-    
-    @State private var searchResultTripList = ["Trip 1", "Trip 2", "Trip 3", "Trip 4", "Trip 5", "Trip 6", "Trip 7", "Trip 9", "Trip 10"]
     
     var body: some View {
-        NavigationStack(){
+        NavigationStack() {
             List {
-                if fitleredTripList.count < 1{
-                    Text("You don’t have any pinned explore yet.\nAdd by click '+' icon in the right top corner.")
+                if filteredTripList.count < 1 {
+                    Text("You don’t have any pinned explore yet.\nAdd by clicking the '+' icon in the top right corner.")
                         .multilineTextAlignment(.center)
-                }
-                else {
+                } else {
                     Section {
-                        ForEach(fitleredTripList, id: \.self) { trip in
+                        ForEach(filteredTripList, id: \.self) { trip in
                             NavigationLink(destination: TripActivityView()) {
                                 HStack {
                                     Image(systemName: "photo")
@@ -32,9 +37,8 @@ struct PinnedView: View {
                                         .frame(width: 60, height: 60)
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                         .clipped()
-                                    
                                     VStack(alignment: .leading) {
-                                        Text(trip)
+                                        Text(trip.name ?? "Trip Name")
                                         Text("0 Activity")
                                     }
                                     .padding(.horizontal, 10)
@@ -54,35 +58,56 @@ struct PinnedView: View {
             .toolbar{
                 Button(action:{
                     isShowingModalNewTrip = true
-                    print(TripList)
                 },label:{
                     Image(systemName: "plus")
                         .foregroundColor(Color.accentColor)
                         .padding(.horizontal)
                 })
                 .sheet(isPresented: $isShowingModalNewTrip) {
-                    NewTripView()
-                        .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                        .presentationDragIndicator(.automatic)
+                    NewTripModal(
+                        onCreateTrip: { tripName in
+                        addNewTrip(tripName: tripName)
+                    })
+                    .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                    .presentationDragIndicator(.automatic)
                 }
             }
             .searchable(text: $searchText, prompt: "Trip Name")
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
-        
     }
     
-    var fitleredTripList: [String] {
+    var filteredTripList: [Trip] {
         if searchText.isEmpty {
-            return searchResultTripList
+            return Array(trips)
         } else {
-            return searchResultTripList.filter { $0.lowercased().contains(searchText) }
+            return trips.filter { trip in
+                trip.name?.localizedCaseInsensitiveContains(searchText) ?? false
+            }
         }
     }
     
-    func deleteTrip(at offsets: IndexSet) {
-        searchResultTripList.remove(atOffsets: offsets)
+    private func deleteTrip(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let trip = trips[index]
+            let result = DataRepository.shared.removeTrip(
+                context: viewContext,
+                trip: trip
+            )
+            if result == false {
+                // Handle error if trip deletion fails
+            }
+        }
+    }
+    private func addNewTrip(tripName: String) {
+        let success = DataRepository.shared.createTrip(
+            context: viewContext,
+            tripName: tripName
+        )
+        if success {
+            print("Added " + tripName)
+        }
     }
 }
 
