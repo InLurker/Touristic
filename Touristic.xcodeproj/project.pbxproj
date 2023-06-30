@@ -23,6 +23,7 @@
 		7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */; };
 		7D60C4B92A445E7C00BFB6B6 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */; };
 		7DE43E082A4AD4DE00A33892 /* APIGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E072A4AD4DE00A33892 /* APIGetter.swift */; };
+		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		7DE43E072A4AD4DE00A33892 /* APIGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGetter.swift; sourceTree = "<group>"; };
+		DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToTripListModal.swift; sourceTree = "<group>"; };
 		DDA005922A499D510016476B /* FilterInterestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterestModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 			children = (
 				7D0D9DBD2A496F8F00843298 /* NewTripView.swift */,
 				DDA005922A499D510016476B /* FilterInterestModal.swift */,
+				DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
 				7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */,
 				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
+				DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */,
 				7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */,
 				7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */,
 				7D60C4B92A445E7C00BFB6B6 /* TagModel.swift in Sources */,
