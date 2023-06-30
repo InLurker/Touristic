@@ -99,15 +99,17 @@ struct DetailActivityView: View {
                             VStack{
                                 HStack{
                                     Text("Review")
-                                        .padding(.bottom,7)
                                         .font(.title2)
                                         .fontWeight(.bold)
+                                    Image(systemName: "star.fill")
+                                        .foregroundColor(.yellow)
+                                    Text("5.0")
                                     Spacer()
                                     NavigationLink(destination:DetailReviewView()){
                                         Text("See All")
                                     }
-                                    
                                 }
+                                .padding(.bottom,7)
                                 .frame(maxWidth: .infinity)
                                 RoundedRectangle(cornerRadius: 10)
                                     .frame(height: 113)

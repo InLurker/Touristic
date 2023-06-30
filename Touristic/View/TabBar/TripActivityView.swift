@@ -19,7 +19,6 @@ struct TripActivityView: View {
                         Text("You don’t have any pinned Activites yet")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.black)
-                            .frame(maxHeight: .infinity)
                         HStack{
                             VStack{
                                 Spacer()
@@ -33,7 +32,7 @@ struct TripActivityView: View {
                             .frame(width: UIScreen.main.bounds.size.width / 2, height: UIScreen.main.bounds.size.height / 8 * 4.5)
                             Spacer()
                         }
-                        .onAppear{
+                        .task{
                             withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()){
                                 self.opacityChanged = 1.0
                                 self.isBouncing = true
@@ -41,7 +40,7 @@ struct TripActivityView: View {
                         }
                     }
                     else{
-                        ForEach(ActivityCount.tripActivity, id: \.self){activities in 
+                        ForEach(ActivityCount.tripActivity, id: \.self){activities in
                             NavigationLink(destination: TripActivityView()){
                                 Text("\(activities)")
                             }
