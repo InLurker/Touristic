@@ -66,8 +66,10 @@ struct PinnedView: View {
                 .sheet(isPresented: $isShowingModalNewTrip) {
                     NewTripModal(
                         onCreateTrip: { tripName in
-                        addNewTrip(tripName: tripName)
-                    })
+                            addNewTrip(
+                                context: viewContext,
+                                tripName: tripName)
+                        })
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
                 }
@@ -98,15 +100,6 @@ struct PinnedView: View {
             if result == false {
                 // Handle error if trip deletion fails
             }
-        }
-    }
-    private func addNewTrip(tripName: String) {
-        let success = DataRepository.shared.createTrip(
-            context: viewContext,
-            tripName: tripName
-        )
-        if success {
-            print("Added " + tripName)
         }
     }
 }

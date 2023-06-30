@@ -29,14 +29,14 @@ struct TripActivityView: View {
                             }
                             .opacity(opacityChanged)
                             .scaleEffect(isBouncing ? 1.2 : 1.0)
-                            .onAppear{
-                                withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()){
-                                    self.opacityChanged = 1.0
-                                    self.isBouncing = true
-                                }
-                            }
                             .frame(width: UIScreen.main.bounds.size.width / 2, height: UIScreen.main.bounds.size.height / 8 * 4.5)
                             Spacer()
+                        }
+                        .onAppear{
+                            withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()){
+                                self.opacityChanged = 1.0
+                                self.isBouncing = true
+                            }
                         }
                     }
                     else{
