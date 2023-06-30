@@ -66,6 +66,7 @@ struct NewTripModal: View {
                             // Notify the parent view about the new trip
                             onCreateTrip?(tripName)
                         }
+                        dismiss()
                     }) {
                         Text("Done")
                             .foregroundColor(Color.accentColor)

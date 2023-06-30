@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddToTripListModal: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @State private var TripName = ""
     private var TripList = TripNameSet.shared
     @State private var isShowingNewTripModal = false
@@ -85,6 +87,7 @@ struct AddToTripListModal: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action:{
+                        dismiss()
                         
                     }){
                         Text("Done")
@@ -98,7 +101,12 @@ struct AddToTripListModal: View {
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .sheet(isPresented: $isShowingNewTripModal) {
-                NewTripView()
+                NewTripModal(
+                    onCreateTrip: { tripName in
+                        addNewTrip(
+                            context: viewContext,
+                            tripName: tripName)
+                    })
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
             }
