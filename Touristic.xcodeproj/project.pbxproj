@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA15D2A49754200048135 /* TripActivityView.swift */; };
 		21DDA1602A49754200048135 /* TripNameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA15E2A49754200048135 /* TripNameData.swift */; };
+		21DDA1682A499B9B00048135 /* DetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA1672A499B9B00048135 /* DetailActivityView.swift */; };
+		21DDA16A2A49AFC000048135 /* DetailReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA1692A49AFC000048135 /* DetailReviewView.swift */; };
+		21DDA16C2A4ABF5000048135 /* ReviewExpandedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDA16B2A4ABF5000048135 /* ReviewExpandedView.swift */; };
 		7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DB92A496F5E00843298 /* PinnedView.swift */; };
 		7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBB2A496F8F00843298 /* TabBarView.swift */; };
 		7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBC2A496F8F00843298 /* ExploreView.swift */; };
@@ -32,6 +35,9 @@
 /* Begin PBXFileReference section */
 		21DDA15D2A49754200048135 /* TripActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripActivityView.swift; sourceTree = "<group>"; };
 		21DDA15E2A49754200048135 /* TripNameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripNameData.swift; sourceTree = "<group>"; };
+		21DDA1672A499B9B00048135 /* DetailActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActivityView.swift; sourceTree = "<group>"; };
+		21DDA1692A49AFC000048135 /* DetailReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewView.swift; sourceTree = "<group>"; };
+		21DDA16B2A4ABF5000048135 /* ReviewExpandedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewExpandedView.swift; sourceTree = "<group>"; };
 		7D0D9DB92A496F5E00843298 /* PinnedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinnedView.swift; sourceTree = "<group>"; };
 		7D0D9DBB2A496F8F00843298 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		7D0D9DBC2A496F8F00843298 /* ExploreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
@@ -80,6 +86,9 @@
 				7D0D9DBC2A496F8F00843298 /* ExploreView.swift */,
 				7D0D9DB92A496F5E00843298 /* PinnedView.swift */,
 				21DDA15D2A49754200048135 /* TripActivityView.swift */,
+				21DDA1672A499B9B00048135 /* DetailActivityView.swift */,
+				21DDA16B2A4ABF5000048135 /* ReviewExpandedView.swift */,
+				21DDA1692A49AFC000048135 /* DetailReviewView.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
 				7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */,
 				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
+				21DDA16A2A49AFC000048135 /* DetailReviewView.swift in Sources */,
 				7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */,
 				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
 				7D0D9DC02A496F8F00843298 /* NewTripModal.swift in Sources */,
@@ -257,8 +267,10 @@
 				7DE43E082A4AD4DE00A33892 /* APIGetter.swift in Sources */,
 				7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */,
 				7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */,
-				7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */,
+				21DDA1682A499B9B00048135 /* DetailActivityView.swift in Sources */,
 				7D60C4B42A4456B300BFB6B6 /* InterestTagComponent.swift in Sources */,
+				21DDA16C2A4ABF5000048135 /* ReviewExpandedView.swift in Sources */,
+				7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */,
 				7D0D9DC32A49936100843298 /* TripsData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

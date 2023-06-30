@@ -12,3 +12,13 @@ class TripNameSet: ObservableObject {
     static let shared = TripNameSet()
     @Published var tripNameSet: [String] = ["9","8"]
 }
+
+class TripActivitySet: ObservableObject {
+    static let activityShared = TripActivitySet()
+    @Published var tripActivity:[Int] = []
+}
+
+class ListReview: ObservableObject {
+    static let list = ListReview()
+    @Published var reviews:[String] = ["0","7","9"]
+}
