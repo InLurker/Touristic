@@ -19,6 +19,7 @@ struct TripActivityView: View {
                         Text("You don’t have any pinned Activites yet")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.black)
+                            .frame(maxHeight: .infinity)
                         HStack{
                             VStack{
                                 Spacer()
