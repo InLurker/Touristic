@@ -53,7 +53,6 @@ struct FilterInterestModal: View {
                                 dismiss()
                             }
                     }
-
                     .onTapGesture {
                         dismiss()
                     }

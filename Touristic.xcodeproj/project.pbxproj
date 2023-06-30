@@ -12,7 +12,7 @@
 		7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DB92A496F5E00843298 /* PinnedView.swift */; };
 		7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBB2A496F8F00843298 /* TabBarView.swift */; };
 		7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBC2A496F8F00843298 /* ExploreView.swift */; };
-		7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBD2A496F8F00843298 /* NewTripView.swift */; };
+		7D0D9DC02A496F8F00843298 /* NewTripModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBD2A496F8F00843298 /* NewTripModal.swift */; };
 		7D0D9DC32A49936100843298 /* TripsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DC12A49936100843298 /* TripsData.xcdatamodeld */; };
 		7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D265A312A4997E30025B785 /* PlacesCardView.swift */; };
 		7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */; };
@@ -22,6 +22,8 @@
 		7D60C4B42A4456B300BFB6B6 /* InterestTagComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B32A4456B300BFB6B6 /* InterestTagComponent.swift */; };
 		7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */; };
 		7D60C4B92A445E7C00BFB6B6 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */; };
+		7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */; };
+		7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E102A4C3C7D00A33892 /* DataController.swift */; };
 		7DE43E082A4AD4DE00A33892 /* APIGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E072A4AD4DE00A33892 /* APIGetter.swift */; };
 		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
@@ -33,7 +35,7 @@
 		7D0D9DB92A496F5E00843298 /* PinnedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinnedView.swift; sourceTree = "<group>"; };
 		7D0D9DBB2A496F8F00843298 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		7D0D9DBC2A496F8F00843298 /* ExploreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
-		7D0D9DBD2A496F8F00843298 /* NewTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTripView.swift; sourceTree = "<group>"; };
+		7D0D9DBD2A496F8F00843298 /* NewTripModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTripModal.swift; sourceTree = "<group>"; };
 		7D0D9DC22A49936100843298 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7D265A312A4997E30025B785 /* PlacesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCardView.swift; sourceTree = "<group>"; };
 		7D60C4A02A444D8000BFB6B6 /* Touristic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touristic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +46,8 @@
 		7D60C4B32A4456B300BFB6B6 /* InterestTagComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestTagComponent.swift; sourceTree = "<group>"; };
 		7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappingHStack.swift; sourceTree = "<group>"; };
 		7D60C4B82A445E7C00BFB6B6 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
+		7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
+		7DE43E102A4C3C7D00A33892 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		7DE43E072A4AD4DE00A33892 /* APIGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIGetter.swift; sourceTree = "<group>"; };
 		DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToTripListModal.swift; sourceTree = "<group>"; };
 		DDA005922A499D510016476B /* FilterInterestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterestModal.swift; sourceTree = "<group>"; };
@@ -65,6 +69,7 @@
 			children = (
 				21DDA15E2A49754200048135 /* TripNameData.swift */,
 				7D0D9DC12A49936100843298 /* TripsData.xcdatamodeld */,
+				7DE43E102A4C3C7D00A33892 /* DataController.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -82,7 +87,7 @@
 		21DDA1662A4976ED00048135 /* Modal */ = {
 			isa = PBXGroup;
 			children = (
-				7D0D9DBD2A496F8F00843298 /* NewTripView.swift */,
+				7D0D9DBD2A496F8F00843298 /* NewTripModal.swift */,
 				DDA005922A499D510016476B /* FilterInterestModal.swift */,
 				DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */,
 			);
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */,
+				7DE43E0D2A4C1E6800A33892 /* Repository */,
 				7D60C4B72A445E6F00BFB6B6 /* Model */,
 				7D60C4B12A4454FD00BFB6B6 /* View */,
 				7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */,
@@ -155,6 +161,14 @@
 				7DE43E072A4AD4DE00A33892 /* APIGetter.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7DE43E0D2A4C1E6800A33892 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7DE43E0B2A4C1E3B00A33892 /* DataRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,11 +243,13 @@
 			files = (
 				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
 				DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */,
+				7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */,
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
 				7D60C4B62A445DDA00BFB6B6 /* WrappingHStack.swift in Sources */,
 				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
 				7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */,
 				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
+				7D0D9DC02A496F8F00843298 /* NewTripModal.swift in Sources */,
 				DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */,
 				7D0D9DC02A496F8F00843298 /* NewTripView.swift in Sources */,
 				7D0D9DBA2A496F5E00843298 /* PinnedView.swift in Sources */,
@@ -241,6 +257,7 @@
 				7DE43E082A4AD4DE00A33892 /* APIGetter.swift in Sources */,
 				7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */,
 				7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */,
+				7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */,
 				7D60C4B42A4456B300BFB6B6 /* InterestTagComponent.swift in Sources */,
 				7D0D9DC32A49936100843298 /* TripsData.xcdatamodeld in Sources */,
 			);
