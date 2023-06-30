@@ -57,10 +57,10 @@ struct ExploreView: View {
     }
     
     var fitleredPlace: [PlaceAdapter] {
-        places.filter { place in
-            searchQuery.isEmpty ||
-            (place.name.lowercased().starts(with: searchQuery.lowercased()) &&
-             place.name.lowercased().first == searchQuery.lowercased().first)
+        
+        if searchQuery.isEmpty {
+            return places
+        }else { return places.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
         }
 
     }

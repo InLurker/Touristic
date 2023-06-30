@@ -13,6 +13,7 @@ struct PlacesCardView: View {
     var images : [String] = [""]
     @State var clicked = true
     @State var pinIcon = "pin"
+    @State var isShowAddToTripModal = false
     
     var body: some View {
         ZStack{
@@ -34,6 +35,7 @@ struct PlacesCardView: View {
                         .bold()
                     Button(
                         action:{
+                            isShowAddToTripModal = true
                             clicked = !clicked
                             pinIcon = clicked ? "pin" : "pin.fill"
                         })
@@ -145,6 +147,12 @@ struct PlacesCardView: View {
                 
             }
         }
+        .sheet(isPresented: $isShowAddToTripModal) {
+            AddToTripListModal()
+                .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                .presentationDragIndicator(.automatic)
+        }
+
 //        .padding(.horizontal,25)
     }
 }
