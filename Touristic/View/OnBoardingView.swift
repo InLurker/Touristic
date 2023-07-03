@@ -1,44 +1,20 @@
 import SwiftUI
 
-let tagList = [
-    TagModel(name: "Hiking"),
-    TagModel(name: "Surfing"),
-    TagModel(name: "Camping"),
-    TagModel(name: "Picnic"),
-    TagModel(name: "Sport"),
-    TagModel(name: "Entertainment"),
-    TagModel(name: "Dancing"),
-    TagModel(name: "Shopping"),
-    TagModel(name: "Healing"),
-    TagModel(name: "Swimming"),
-    TagModel(name: "Spiritual"),
-    TagModel(name: "Cycling"),
-    TagModel(name: "Snorkeling"),
-    TagModel(name: "Diving"),
-    TagModel(name: "Climbing"),
-    TagModel(name: "Recreation"),
-    TagModel(name: "Night Life"),
-    TagModel(name: "Local"),
-    TagModel(name: "Photography"),
-    TagModel(name: "Aquatic Recreation"),
-    TagModel(name: "Culinary"),
-    TagModel(name: "Historical"),
-    TagModel(name: "Gardening")
-]
-
 struct OnBoardingView: View {
     @AppStorage("isOnBoardingCompleted") var isOnBoardingCompleted: Bool = false
 
+    @StateObject private var selectedInterestData = SelectedInterestData.shared
     @State private var selectedInterests: [String] = []
+    
     var body: some View {
         NavigationStack() {
             VStack(alignment: .leading) {
                 Text("Select up to 5")
                     .multilineTextAlignment(.leading)
                     .font(.headline)
-                WrappingHStack(models: tagList, viewGenerator: { tag in
+                WrappingHStack(models: Array(interestDict.keys).sorted(), viewGenerator: { interestID in
                     InterestTagComponent(
-                        interest: tag.name,
+                        interestID: interestID,
                         selectedInterests: $selectedInterests
                     )
                 })
@@ -49,7 +25,11 @@ struct OnBoardingView: View {
                 
                 Button(
                     action: {
+                        UserDefaults.standard.set(selectedInterests, forKey: "selectedInterest")
                         isOnBoardingCompleted = true
+                        
+                        selectedInterestData.selectedInterests = selectedInterests
+                        selectedInterestData.saveSelectedInterests()
                     }
                 ) {
                     Spacer()
@@ -63,6 +43,7 @@ struct OnBoardingView: View {
                     Spacer()
                     Button(
                         action: {
+                            UserDefaults.standard.set(selectedInterests, forKey: "selectedInterest")
                             isOnBoardingCompleted = true
                         }
                     ) {
