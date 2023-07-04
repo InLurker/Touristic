@@ -29,7 +29,6 @@
 		7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E102A4C3C7D00A33892 /* DataController.swift */; };
 		7DE43E132A4ED8EF00A33892 /* InterestDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E122A4ED8EF00A33892 /* InterestDict.swift */; };
 		7DE43E1B2A52047E00A33892 /* SelectedInterestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E1A2A52047E00A33892 /* SelectedInterestData.swift */; };
-		7DE43E1E2A52196100A33892 /* NewTripModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBD2A496F8F00843298 /* NewTripModal.swift */; };
 		DD0BDED32A4EC652003022B9 /* AddNewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0BDED22A4EC652003022B9 /* AddNewTrip.swift */; };
 		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
@@ -265,7 +264,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DE43E1E2A52196100A33892 /* NewTripModal.swift in Sources */,
 				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
 				DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */,
 				7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */,

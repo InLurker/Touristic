@@ -71,7 +71,8 @@ struct PinnedView: View {
                             addNewTrip(
                                 context: viewContext,
                                 tripName: tripName)
-                        })
+                        }
+                    )
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
                 }

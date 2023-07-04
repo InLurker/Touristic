@@ -13,24 +13,24 @@ struct AddToTripListModal: View {
     
     @State var place_id : String = ""
     @State private var isShowingNewTripModal = false
-  
+    
     @FetchRequest(
         entity: Trip.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Trip.objectID, ascending: true)
         ]
     ) var tripList: FetchedResults<Trip>
-
+    
     var body: some View {
         NavigationStack{
             VStack {
-                
                 Capsule()
                     .fill(Color.accentColor) // Choose the desired background color
                     .frame(height: 40) // Adjust the height as needed
-                    
+                
                     .overlay(
-                        Button(action: {                            isShowingNewTripModal = true
+                        Button(action: {
+                            isShowingNewTripModal = true
                         }) {
                             HStack {
                                 Spacer()
@@ -41,8 +41,7 @@ struct AddToTripListModal: View {
                         }
                     )
                     .padding(.horizontal)
-                    
-
+                
                 ForEach(tripList, id: \.self) { trip in
                     HStack {
                         Image(systemName: "photo")
@@ -66,9 +65,6 @@ struct AddToTripListModal: View {
                     .padding(.horizontal, 40)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
-                
-                
-                
             }
             .navigationBarTitle("Add To", displayMode: .inline)
             .toolbar{
@@ -91,9 +87,7 @@ struct AddToTripListModal: View {
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
                     }
-                    
                 }
-                
             }
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -103,14 +97,13 @@ struct AddToTripListModal: View {
                         addNewTrip(
                             context: viewContext,
                             tripName: tripName)
-                    })
-                    .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                    .presentationDragIndicator(.automatic)
+                    }
+                )
+                .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+                .presentationDragIndicator(.automatic)
             }
-
         }
     }
-    
 }
 
 struct RoundedCheckbox: View {

@@ -11,12 +11,17 @@ import CoreData
 
 
 class DataRepository {
-    
     static let shared = DataRepository()
     
     func createTrip(context: NSManagedObjectContext, tripName: String) -> Bool {
+        guard !tripName.isEmpty else {
+            return false // Empty name, return false
+        }
+        
+        let uniqueName = generateUniqueName(context: context, name: tripName)
+        
         let trip = Trip(context: context)
-        trip.name = tripName
+        trip.name = uniqueName
         
         do {
             try context.save()
@@ -94,6 +99,31 @@ class DataRepository {
             return count > 0
         } catch {
             print("Error checking if place is pinned: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    private func generateUniqueName(context: NSManagedObjectContext, name: String) -> String {
+        var uniqueName = name
+        var count = 1
+        
+        while tripNameExists(context: context, name: uniqueName) {
+            count += 1
+            uniqueName = "\(name) \(count)"
+        }
+        
+        return uniqueName
+    }
+
+    private func tripNameExists(context: NSManagedObjectContext, name: String) -> Bool {
+        let fetchRequest: NSFetchRequest<Trip> = Trip.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
+        
+        do {
+            let count = try context.count(for: fetchRequest)
+            return count > 0
+        } catch {
+            print("Error fetching trip count: \(error.localizedDescription)")
             return false
         }
     }
