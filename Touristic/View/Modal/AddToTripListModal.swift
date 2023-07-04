@@ -13,34 +13,30 @@ struct AddToTripListModal: View {
     
     @State var place_id : String = ""
     @State private var isShowingNewTripModal = false
+    @State private var showAlert = false
     
     @FetchRequest(
         entity: Trip.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Trip.objectID, ascending: true)
+            NSSortDescriptor(keyPath: \Trip.objectID, ascending: false)
         ]
     ) var tripList: FetchedResults<Trip>
     
     var body: some View {
         NavigationStack{
-            VStack {
-                Capsule()
-                    .fill(Color.accentColor) // Choose the desired background color
-                    .frame(height: 40) // Adjust the height as needed
-                
-                    .overlay(
-                        Button(action: {
-                            isShowingNewTripModal = true
-                        }) {
-                            HStack {
-                                Spacer()
-                                Text("Add New Trip!")
-                                    .foregroundColor(.white) // Set the text color
-                                Spacer()
-                            }
-                        }
-                    )
-                    .padding(.horizontal)
+            ScrollView() {
+                Button(action: {
+                    isShowingNewTripModal = true
+                }) {
+                    HStack {
+                        Spacer()
+                        Text("Add New Trip!")
+                            .foregroundColor(.white) // Set the text color
+                        Spacer()
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(height: 40) // Adjust the height as needed
                 
                 ForEach(tripList, id: \.self) { trip in
                     HStack {
@@ -66,6 +62,7 @@ struct AddToTripListModal: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
+            .padding(25)
             .navigationBarTitle("Add To", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
@@ -89,14 +86,25 @@ struct AddToTripListModal: View {
                     }
                 }
             }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Failed To Create New Trip"),
+                    message: Text("An error occurred while creating the trip."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .sheet(isPresented: $isShowingNewTripModal) {
                 NewTripModal(
                     onCreateTrip: { tripName in
-                        addNewTrip(
+                        let success = DataRepository.shared.createTrip(
                             context: viewContext,
-                            tripName: tripName)
+                            tripName: tripName
+                        )
+                        if !success {
+                            showAlert = true
+                        }
                     }
                 )
                 .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
