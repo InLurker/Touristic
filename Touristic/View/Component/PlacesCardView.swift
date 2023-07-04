@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlacesCardView: View {
     var interests : [String] = ["yaya", "okeo"]
+    var placeID : String = ""
     var name : String = ""
     var images : [String] = [""]
     @State var clicked = true

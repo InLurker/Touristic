@@ -30,7 +30,7 @@ struct ExploreView: View {
                 LazyVStack(alignment: .leading, spacing: 14){
                     ForEach(fitleredPlace, id: \.place_id) { place in
                         
-                        PlacesCardView(interests: place.interest, name: place.name, images: place.images)
+                        PlacesCardView(interests: place.interest, placeID: place.place_id, name: place.name, images: place.images)
                     }
                 }
                 .padding(.vertical, 14)
