@@ -9,15 +9,18 @@ import SwiftUI
 
 struct AddToTripListModal: View {
     @Environment(\.dismiss) var dismiss
-    @State private var TripName = ""
-    private var TripList = TripNameSet.shared
-    @State private var isShowingNewTripModal = false
+    @Environment(\.managedObjectContext) private var viewContext
     
-    @State private var items: [Item] = [
-        Item(name: "Item 1", isChecked: false),
-        Item(name: "Item 2", isChecked: false),
-        Item(name: "Item 3", isChecked: false)
-    ]
+    @State var place_id : String = ""
+    @State private var isShowingNewTripModal = false
+  
+    @FetchRequest(
+        entity: Trip.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Trip.objectID, ascending: true)
+        ]
+    ) var tripList: FetchedResults<Trip>
+
     var body: some View {
         NavigationStack{
             VStack {
@@ -27,11 +30,7 @@ struct AddToTripListModal: View {
                     .frame(height: 40) // Adjust the height as needed
                     
                     .overlay(
-                        Button(action: {
-                            TripList.tripNameSet.append(TripName)
-                            isShowingNewTripModal = true
-//                            print(TripList)
-//                            dismiss()
+                        Button(action: {                            isShowingNewTripModal = true
                         }) {
                             HStack {
                                 Spacer()
@@ -44,7 +43,7 @@ struct AddToTripListModal: View {
                     .padding(.horizontal)
                     
 
-                ForEach(items.indices, id: \.self) { index in
+                ForEach(tripList, id: \.self) { trip in
                     HStack {
                         Image(systemName: "photo")
                             .resizable()
@@ -54,14 +53,14 @@ struct AddToTripListModal: View {
                             .clipped()
                         
                         VStack(alignment: .leading) {
-                            Text(items[index].name)
+                            Text(trip.name ?? "Trip Name")
                             Text("0 Activity")
                         }
                         .padding(.horizontal, 10)
                         
                         Spacer()
                         
-                        RoundedCheckbox(isChecked: $items[index].isChecked)
+                        RoundedCheckbox(isChecked: DataRepository.shared.isPlaceInTrip(context: viewContext, trip: trip, placeID: place_id), place_id: place_id)
                     }
                     .padding(.vertical, 14)
                     .padding(.horizontal, 40)
@@ -85,6 +84,7 @@ struct AddToTripListModal: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action:{
+                        dismiss()
                         
                     }){
                         Text("Done")
@@ -98,7 +98,12 @@ struct AddToTripListModal: View {
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .sheet(isPresented: $isShowingNewTripModal) {
-                NewTripView()
+                NewTripModal(
+                    onCreateTrip: { tripName in
+                        addNewTrip(
+                            context: viewContext,
+                            tripName: tripName)
+                    })
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
             }
@@ -109,7 +114,8 @@ struct AddToTripListModal: View {
 }
 
 struct RoundedCheckbox: View {
-    @Binding var isChecked: Bool
+    @State var isChecked: Bool
+    @State var place_id : String
     
     var body: some View {
         ZStack {
@@ -118,6 +124,7 @@ struct RoundedCheckbox: View {
                 .frame(width: 24, height: 24)
             
             if isChecked {
+                
                 Image(systemName: "checkmark")
                     .foregroundColor(.blue)
             }
@@ -126,11 +133,6 @@ struct RoundedCheckbox: View {
             isChecked.toggle()
         }
     }
-}
-struct Item: Identifiable {
-    let id = UUID()
-    let name: String
-    var isChecked: Bool
 }
 
 struct AddToTripListModal_Previews: PreviewProvider {

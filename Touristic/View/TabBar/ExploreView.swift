@@ -8,18 +8,29 @@
 import SwiftUI
 
 struct ExploreView: View {
+    @StateObject private var selectedInterestData = SelectedInterestData.shared
+        
+    @State var selectedInterests: [String]
+    
     @State var searchQuery = ""
     @State var isShowingFilterModal : Bool = false
     @State var places: [PlaceAdapter] = []
     
+    
+    init(selectedInterests: Binding<[String]> = .init(
+        get: { SelectedInterestData.shared.selectedInterests },
+        set: { SelectedInterestData.shared.selectedInterests = $0 }
+    )) {
+        _selectedInterests = State(initialValue: selectedInterests.wrappedValue)
+    }
+    
     var body: some View {
-        
         NavigationStack{
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 14){
                     ForEach(fitleredPlace, id: \.place_id) { place in
                         
-                        PlacesCardView(interests: place.interest, name: place.name, images: place.images)
+                        PlacesCardView(interests: place.interest, placeID: place.place_id, name: place.name, images: place.images)
                     }
                 }
                 .padding(.vertical, 14)
@@ -39,8 +50,9 @@ struct ExploreView: View {
                 }
             }
             .sheet(isPresented: $isShowingFilterModal) {
-                FilterInterestModal()
-                
+                FilterInterestModal(
+                    selectedInterests: $selectedInterests
+                )
             }
         }
         .onAppear {
@@ -57,15 +69,11 @@ struct ExploreView: View {
     }
     
     var fitleredPlace: [PlaceAdapter] {
-        
         if searchQuery.isEmpty {
             return places
         }else { return places.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
         }
-
     }
-    
-    
 }
 
 struct ExploreView_Previews: PreviewProvider {

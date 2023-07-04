@@ -22,38 +22,40 @@ struct PinnedView: View {
     
     var body: some View {
         NavigationStack() {
-            List {
+            VStack{
                 if filteredTripList.count < 1 {
-                    Text("You don’t have any pinned explore yet.\nAdd by clicking the '+' icon in the top right corner.")
-                        .multilineTextAlignment(.center)
+                        Text("You don’t have any pinned explore yet.\nAdd by clicking the '+' icon in the top right corner.")
+                            .multilineTextAlignment(.center)
                 } else {
-                    Section {
-                        ForEach(filteredTripList, id: \.self) { trip in
-                            NavigationLink(destination: TripActivityView()) {
-                                HStack {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 60, height: 60)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                        .clipped()
-                                    VStack(alignment: .leading) {
-                                        Text(trip.name ?? "Trip Name")
-                                        Text("0 Activity")
+                    List{
+                        Section {
+                            ForEach(filteredTripList, id: \.self) { trip in
+                                NavigationLink(destination: TripActivityView()) {
+                                    HStack {
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 60, height: 60)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                                            .clipped()
+                                        VStack(alignment: .leading) {
+                                            Text(trip.name ?? "Trip Name")
+                                            Text("0 Activity")
+                                        }
+                                        .padding(.horizontal, 10)
+                                        Spacer()
                                     }
-                                    .padding(.horizontal, 10)
-                                    Spacer()
+                                    .padding(.vertical, 14)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                                 }
-                                .padding(.vertical, 14)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
+                            .onDelete(perform: deleteTrip)
                         }
-                        .onDelete(perform: deleteTrip)
+                    header: { Text("") }
                     }
-                header: { Text("") }
+                    .listStyle(.insetGrouped)
                 }
             }
-            .listStyle(.insetGrouped)
             .navigationTitle("Pinned")
             .toolbar{
                 Button(action:{
@@ -66,8 +68,10 @@ struct PinnedView: View {
                 .sheet(isPresented: $isShowingModalNewTrip) {
                     NewTripModal(
                         onCreateTrip: { tripName in
-                        addNewTrip(tripName: tripName)
-                    })
+                            addNewTrip(
+                                context: viewContext,
+                                tripName: tripName)
+                        })
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
                 }
@@ -98,15 +102,6 @@ struct PinnedView: View {
             if result == false {
                 // Handle error if trip deletion fails
             }
-        }
-    }
-    private func addNewTrip(tripName: String) {
-        let success = DataRepository.shared.createTrip(
-            context: viewContext,
-            tripName: tripName
-        )
-        if success {
-            print("Added " + tripName)
         }
     }
 }
