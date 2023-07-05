@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct PlacesCardView: View {
-    var interests : [String] = ["yaya", "okeo"]
-    var placeID : String = ""
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var placeID : String
+    var interests : [String] = []
     var name : String = ""
     var images : [String] = [""]
-    @State var clicked = true
     @State var pinIcon = "pin"
     @State var isShowAddToTripModal = false
     
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
-                HStack(alignment: .center){
+                HStack(alignment: .center) {
                     Text("\(name)")
                         .lineLimit(1)
                         .font(.headline)
@@ -35,14 +36,17 @@ struct PlacesCardView: View {
                         .font(.footnote)
                         .bold()
                     Button(
-                        action:{
+                        action: {
                             isShowAddToTripModal = true
-                            clicked = !clicked
-                            pinIcon = clicked ? "pin" : "pin.fill"
-                        })
-                    {
+                        }
+                    ) {
                         Image(systemName: pinIcon)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.accentColor)
+                    }
+                    .onChange(of: isShowAddToTripModal) { isBeingShown in
+                        if !isBeingShown {
+                            checkForPin()
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -69,16 +73,13 @@ struct PlacesCardView: View {
                             .cornerRadius(10)
                     case .success(let image):
                         image.resizable()
-                            
                             .aspectRatio(contentMode: .fill)
                             .frame(
                                 height: 120,
                                 alignment: .center
                             )
-                           
                             .cornerRadius(10)
                             .clipped()
-                            
                     case .failure:
                         Image(systemName: "photo")
                             .resizable()
@@ -99,10 +100,8 @@ struct PlacesCardView: View {
                             )
                             .cornerRadius(10)
                             .clipped()
-                        
                     }
                 }
-                
             }
             .padding(5)
             GeometryReader { geometry in
@@ -145,22 +144,22 @@ struct PlacesCardView: View {
                         
                     }
                 }
-                
             }
         }
         .sheet(isPresented: $isShowAddToTripModal) {
-            AddToTripListModal()
-                .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
-                .presentationDragIndicator(.automatic)
+            AddToTripListModal(
+                place_id: placeID
+            )
+            .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+            .presentationDragIndicator(.automatic)
         }
-
-//        .padding(.horizontal,25)
+        .onAppear{
+            checkForPin()
+        }
     }
-}
-
-struct PlacesCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlacesCardView()
-            .frame(height: 180)
+    
+    func checkForPin() {
+        let placeIsPinned = DataRepository.shared.isPlacePinned(context: viewContext, placeID: placeID)
+        pinIcon = placeIsPinned ? "pin.fill" : "pin"
     }
 }

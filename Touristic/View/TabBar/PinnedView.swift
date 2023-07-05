@@ -25,7 +25,7 @@ struct PinnedView: View {
         NavigationStack() {
             VStack{
                 if filteredTripList.count < 1 {
-                        Text("You don’t have any pinned explore yet.\nAdd by clicking the '+' icon in the top right corner.")
+                        Text("You don’t have any pinned trips yet.\nAdd by clicking the '+' icon in the top right corner.")
                             .multilineTextAlignment(.center)
                 } else {
                     List{

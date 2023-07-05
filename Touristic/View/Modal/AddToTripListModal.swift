@@ -11,9 +11,12 @@ struct AddToTripListModal: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) private var viewContext
     
-    @State var place_id : String = ""
+    @State var place_id : String
     @State private var isShowingNewTripModal = false
     @State private var showAlert = false
+    
+    @State private var tripsContainingPlaces: [Trip] = [] // original fetched array of trip id
+    @State private var userSelectedTrip: [Trip] = [] // modifiable array of trip id
     
     @FetchRequest(
         entity: Trip.entity(),
@@ -31,7 +34,6 @@ struct AddToTripListModal: View {
                     HStack {
                         Spacer()
                         Text("Add New Trip!")
-                            .foregroundColor(.white) // Set the text color
                         Spacer()
                     }
                 }
@@ -55,7 +57,10 @@ struct AddToTripListModal: View {
                         
                         Spacer()
                         
-                        RoundedCheckbox(isChecked: DataRepository.shared.isPlaceInTrip(context: viewContext, trip: trip, placeID: place_id), place_id: place_id)
+                        RoundedCheckbox(
+                            trip: trip,
+                            userSelectedTrip: $userSelectedTrip
+                        )
                     }
                     .padding(.vertical, 14)
                     .padding(.horizontal, 40)
@@ -65,7 +70,7 @@ struct AddToTripListModal: View {
             .padding(25)
             .navigationBarTitle("Add To", displayMode: .inline)
             .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action:{
                         dismiss()
                     }){
@@ -73,12 +78,11 @@ struct AddToTripListModal: View {
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
                     }
-                    
                 }
-                ToolbarItem(placement: .navigationBarTrailing){
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action:{
+                        handleDoneButton()
                         dismiss()
-                        
                     }){
                         Text("Done")
                             .foregroundColor(Color.accentColor)
@@ -111,12 +115,45 @@ struct AddToTripListModal: View {
                 .presentationDragIndicator(.automatic)
             }
         }
+        .onAppear{
+            let fetchedTripList = DataRepository.shared.getTripsContainingPlaceID(context: viewContext, trips: Array(tripList), placeID: place_id)
+            tripsContainingPlaces = fetchedTripList
+            userSelectedTrip = fetchedTripList
+        }
+    }
+    
+    private func handleDoneButton() {
+        let tripsToAdd = userSelectedTrip.filter { !tripsContainingPlaces.contains($0) }
+        let tripsToRemove = tripsContainingPlaces.filter { !userSelectedTrip.contains($0) }
+        
+        
+        tripsToAdd.forEach { trip in
+            let success = DataRepository.shared.addPlaceToTrip(context: viewContext, trip: trip, placeID: place_id)
+            if !success {
+                // Show alert for error when adding place to trip
+                showAlert = true
+                return // Abort the iterator
+            }
+        }
+
+        tripsToRemove.forEach { trip in
+            let success = DataRepository.shared.removePlaceFromTrip(context: viewContext, trip: trip, placeID: place_id)
+            if !success {
+                // Show alert for error when removing place from trip
+                showAlert = true
+                return // Abort the iterator
+            }
+        }
     }
 }
 
 struct RoundedCheckbox: View {
-    @State var isChecked: Bool
-    @State var place_id : String
+    var trip: Trip
+    @Binding var userSelectedTrip: [Trip]
+    
+    var isChecked: Bool {
+        userSelectedTrip.contains(trip)
+    }
     
     var body: some View {
         ZStack {
@@ -125,19 +162,25 @@ struct RoundedCheckbox: View {
                 .frame(width: 24, height: 24)
             
             if isChecked {
-                
                 Image(systemName: "checkmark")
                     .foregroundColor(.blue)
             }
         }
         .onTapGesture {
-            isChecked.toggle()
+            if isChecked {
+                userSelectedTrip.removeAll { $0 == trip }
+            } else {
+                userSelectedTrip.append(trip)
+            }
         }
     }
 }
 
+
 struct AddToTripListModal_Previews: PreviewProvider {
     static var previews: some View {
-        AddToTripListModal()
+        AddToTripListModal(
+            place_id: "I1"
+        )
     }
 }

@@ -103,6 +103,20 @@ class DataRepository {
         }
     }
     
+    func getTripsContainingPlaceID(context: NSManagedObjectContext, trips: [Trip], placeID: String) -> [Trip] {
+        var tripsContainingPlace: [Trip] = []
+        
+        for trip in trips {
+            if let places = trip.places as? Set<Place> {
+                let filteredPlaces = places.filter { $0.place_id == placeID }
+                if !filteredPlaces.isEmpty {
+                    tripsContainingPlace.append(trip)
+                }
+            }
+        }
+        return tripsContainingPlace
+    }
+    
     private func generateUniqueName(context: NSManagedObjectContext, name: String) -> String {
         var uniqueName = name
         var count = 1
