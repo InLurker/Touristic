@@ -30,6 +30,7 @@
 		7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E102A4C3C7D00A33892 /* DataController.swift */; };
 		DD0BDED32A4EC652003022B9 /* AddNewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0BDED22A4EC652003022B9 /* AddNewTrip.swift */; };
 		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
+		DD8D93C42A56688A005CDD31 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D93C32A56688A005CDD31 /* MapView.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		7DE43E102A4C3C7D00A33892 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		DD0BDED22A4EC652003022B9 /* AddNewTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTrip.swift; sourceTree = "<group>"; };
 		DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToTripListModal.swift; sourceTree = "<group>"; };
+		DD8D93C32A56688A005CDD31 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DDA005922A499D510016476B /* FilterInterestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterestModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,6 +163,7 @@
 				7D60C4B32A4456B300BFB6B6 /* InterestTagComponent.swift */,
 				7D60C4B52A445DDA00BFB6B6 /* WrappingHStack.swift */,
 				7D265A312A4997E30025B785 /* PlacesCardView.swift */,
+				DD8D93C32A56688A005CDD31 /* MapView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
+				DD8D93C42A56688A005CDD31 /* MapView.swift in Sources */,
 				DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */,
 				7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */,
 				7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */,
