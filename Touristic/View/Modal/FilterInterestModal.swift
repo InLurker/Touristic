@@ -40,6 +40,9 @@ struct FilterInterestModal: View {
                                 dismiss()
                             }
                     }
+                    .onTapGesture {
+                        dismiss()
+                    }
                     .foregroundColor(.blue)
                 }
                 
