@@ -27,7 +27,7 @@ struct ExploreView: View {
     var body: some View {
         NavigationStack{
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 14){
+                LazyVStack(alignment: .leading, spacing: 14) {
                     ForEach(fitleredPlace, id: \.place_id) { place in
                         PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
                     }
@@ -72,11 +72,5 @@ struct ExploreView: View {
             return places
         }else { return places.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
         }
-    }
-}
-
-struct ExploreView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExploreView()
     }
 }
