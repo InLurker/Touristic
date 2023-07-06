@@ -17,7 +17,6 @@ struct TabBarView: View {
                 Label("Pinned", systemImage: "pin")
             }
         }
-//        .background(Color(UIColor.systemGray6))
     }
 }
 
