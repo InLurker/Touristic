@@ -16,9 +16,8 @@ struct TripActivityView: View {
             VStack{
                 ZStack{
                     if  ActivityCount.tripActivity.count < 1{
-                        Text("You don’t have any pinned Activites yet")
+                        Text("You don’t have any pinned activites yet")
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.black)
                         HStack{
                             VStack{
                                 Spacer()

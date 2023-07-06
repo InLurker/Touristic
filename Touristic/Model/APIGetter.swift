@@ -52,7 +52,8 @@ func getPlacesByInterest(completion: @escaping (Result<[PlaceAdapter], Error>) -
             completion(.success(response.data))
         } catch {
             completion(.failure(error))
-        }    }.resume()
+        }
+    }.resume()
 }
 
 struct GetAPITest: View {

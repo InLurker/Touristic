@@ -13,18 +13,19 @@ struct PinnedView: View {
     @FetchRequest(
         entity: Trip.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Trip.objectID, ascending: true)
+            NSSortDescriptor(keyPath: \Trip.objectID, ascending: false)
         ]
     ) var trips: FetchedResults<Trip>
     
     @State private var searchText = ""
     @State private var isShowingModalNewTrip = false
+    @State private var showAlert = false
     
     var body: some View {
         NavigationStack() {
             VStack{
                 if filteredTripList.count < 1 {
-                        Text("You don’t have any pinned explore yet.\nAdd by clicking the '+' icon in the top right corner.")
+                        Text("You don’t have any pinned trips yet.\nAdd by clicking the '+' icon in the top right corner.")
                             .multilineTextAlignment(.center)
                 } else {
                     List{
@@ -68,12 +69,24 @@ struct PinnedView: View {
                 .sheet(isPresented: $isShowingModalNewTrip) {
                     NewTripModal(
                         onCreateTrip: { tripName in
-                            addNewTrip(
+                            let success = DataRepository.shared.createTrip(
                                 context: viewContext,
-                                tripName: tripName)
-                        })
+                                tripName: tripName
+                            )
+                            if !success {
+                                showAlert = true
+                            }
+                        }
+                    )
                     .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
                     .presentationDragIndicator(.automatic)
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Failed To Create New Trip"),
+                        message: Text("An error occurred while creating the trip."),
+                        dismissButton: .default(Text("OK"))
+                    )
                 }
             }
             .searchable(text: $searchText, prompt: "Trip Name")
