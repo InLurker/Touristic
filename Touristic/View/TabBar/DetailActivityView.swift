@@ -19,69 +19,6 @@ struct DetailActivityView: View {
             VStack{
                 ScrollView{
                     VStack{
-                        //                                                    Image(systemName: CarouselItems[CarouselCounter])
-                        //                                                        .resizable()
-                        //                                                        .scaledToFit()
-                        //                                                        .task{
-                        //                                                            withAnimation(Animation.easeInOut(duration: 5).repeatForever()){
-                        //                                                                if CarouselCounter + 1 >= CarouselItems.count{
-                        //                                                                    CarouselCounter = 0
-                        //                                                                }
-                        //                                                                else{
-                        //                                                                    CarouselCounter += 1
-                        //
-                        //                                                                }
-                        //
-                        //                                                            }
-                        //                                                        }
-                        //                                                    HStack{
-                        //                                                        Button(action:{
-                        //                                                            if CarouselCounter < 0 {
-                        //                                                                CarouselCounter = CarouselItems.count
-                        //                                                            }
-                        //                                                            else{
-                        //                                                                CarouselCounter -= 1
-                        //                                                            }
-                        //                                                        }){
-                        //                                                            Image(systemName: "chevron.left")
-                        //                                                                .foregroundColor(.white)
-                        //                                                        }
-                        //                                                        Spacer()
-                        //                                                        Button(action:{
-                        //                                                            if CarouselCounter >= CarouselItems.count {
-                        //                                                                CarouselCounter = 0
-                        //                                                            }
-                        //                                                            else{
-                        //                                                                CarouselCounter += 1
-                        //                                                            }
-                        //                                                        }){
-                        //                                                            Image(systemName: "chevron.right")
-                        //                                                                .foregroundColor(.white)
-                        //                                                        }
-                        //                                                    }
-                        //                                                    .padding(.horizontal)
-                        //                                                    .font(.title)
-                        //                                                    VStack{
-                        //                                                        Spacer()
-                        //                                                        RoundedRectangle(cornerRadius: 20)
-                        //                                                            .frame(width:80,height:20)
-                        //                                                            .foregroundColor(Color(UIColor.systemGray))
-                        //                                                            .overlay(
-                        //                                                                HStack {
-                        //                                                                    ForEach(Array(CarouselItems.enumerated()), id: \.1.self) { index, item in
-                        //                                                                        Button(action: {
-                        //                                                                            CarouselCounter = index
-                        //                                                                            carouselColor = .blue
-                        //                                                                        }) {
-                        //                                                                                Image(systemName: "circle.fill")
-                        //                                                                                .foregroundColor(CarouselCounter == index ? .blue : .black)
-                        //                                                                        }
-                        //
-                        //                                                                    }
-                        //                                                                }
-                        //                                                            )
-                        //                                                    }
-                        //                                                    .padding(.vertical)
                         TabView {
                             ForEach(0..<CarouselItems.count, id: \.self) { index in
                                 Image(systemName: CarouselItems[index])
@@ -243,20 +180,4 @@ struct DetailActivityView_Previews: PreviewProvider {
     }
 }
 
-struct MapView: UIViewRepresentable {
-    let coordinate: CLLocationCoordinate2D
-    
-    func makeUIView(context: Context) -> MKMapView {
-        MKMapView(frame: .zero)
-    }
-    
-    func updateUIView(_ uiView: MKMapView, context: Context) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = "Pura Ulun Danau Bratan"
-        uiView.addAnnotation(annotation)
-        
-        let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-        uiView.setRegion(region, animated: true)
-    }
-}
+
