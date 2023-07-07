@@ -17,6 +17,24 @@ struct PlaceAdapter: Codable {
     let longitude: Double
     let interest: [String]
     let images: [String]
+    let reviews: [ReviewAdapter]
+    let avg_rating: String
+    let prices: [Prices]
+}
+
+struct ReviewAdapter: Codable {
+    let id: String
+    let place_id: String
+    let name: String
+    let description: String
+    let rating: Double
+}
+
+struct Prices : Codable {
+    let id: String
+    let place_id: String
+    let type: String
+    let price: String
 }
 
 struct PlaceResponse: Codable {
@@ -25,9 +43,9 @@ struct PlaceResponse: Codable {
     let data: [PlaceAdapter]
 }
 
-func getPlacesByInterest(completion: @escaping (Result<[PlaceAdapter], Error>) -> Void) {
+func getPlacesByInterest(interests: [String], completion: @escaping (Result<[PlaceAdapter], Error>) -> Void) {
     let url = URL(string: "https://touristic.masbek.my.id/api/get-place-by-interest")!
-    let interests = ["I6", "I9", "I16", "I19"]
+    let interests = interests
     let bodyData = try! JSONEncoder().encode(["interest_id": interests])
     
     var request = URLRequest(url: url)
@@ -50,6 +68,7 @@ func getPlacesByInterest(completion: @escaping (Result<[PlaceAdapter], Error>) -
             let decoder = JSONDecoder()
             let response = try decoder.decode(PlaceResponse.self, from: data)
             completion(.success(response.data))
+            
         } catch {
             completion(.failure(error))
         }
@@ -62,7 +81,7 @@ struct GetAPITest: View {
     var body: some View {
         VStack {
             Button(action: {
-                getPlacesByInterest { result in
+                getPlacesByInterest(interests: ["I6","I9"]) { result in
                     switch result {
                     case .success(let places):
                         self.places = places
@@ -77,7 +96,7 @@ struct GetAPITest: View {
             
             // Display the result
             List(places, id: \.place_id) { place in
-                Text(place.name)
+                Text(place.avg_rating)
             }
         }
     }
