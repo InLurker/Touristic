@@ -17,6 +17,7 @@ struct ExploreView: View {
     @State var places: [PlaceAdapter] = []
     
     
+    
     init(selectedInterests: Binding<[String]> = .init(
         get: { SelectedInterestData.shared.selectedInterests },
         set: { SelectedInterestData.shared.selectedInterests = $0 }
@@ -29,8 +30,14 @@ struct ExploreView: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     ForEach(fitleredPlace, id: \.place_id) { place in
-                        PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
+                        NavigationLink(destination: DetailActivityView(detailPlace: place, CarouselItems: place.images)){
+                            PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
+                        }
+                        .foregroundColor(.black)
                     }
+                }
+                .onChange(of: _selectedInterests.wrappedValue) { _ in
+                    fetchPlaceByInterest()
                 }
                 .padding(.vertical, 14)
                 .padding(.horizontal, 25)
@@ -55,22 +62,25 @@ struct ExploreView: View {
             }
         }
         .onAppear {
-            getPlacesByInterest { result in
-                switch result {
-                case .success(let place):
-                    places = place
-                case .failure(let error):
-                    print(error)
-                }
-            }
+            fetchPlaceByInterest()
         }
-        
     }
     
     var fitleredPlace: [PlaceAdapter] {
         if searchQuery.isEmpty {
             return places
         }else { return places.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }
+        }
+    }
+    
+    func fetchPlaceByInterest() {
+        getPlacesByInterest(interests: selectedInterests) { result in
+            switch result {
+            case .success(let place):
+                places = place
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
