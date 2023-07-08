@@ -17,15 +17,15 @@ struct DetailReviewView: View {
             VStack{
                 ScrollView{
                     ForEach(reviews, id: \.id){
-                        comments in
-                        NavigationLink(destination: TripActivityView()){
+                        review in
+                        NavigationLink(destination: ReviewExpandedView(review: review)){
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(height: 113)
                                 .foregroundColor(Color(UIColor.systemGray6))
                                 .overlay(
                                     VStack{
                                         HStack{
-                                            Text("\(comments.name)")
+                                            Text("\(review.name)")
                                             Spacer()
                                             Image(systemName: "star.fill")
                                             Text("5")
@@ -37,7 +37,7 @@ struct DetailReviewView: View {
                                             .foregroundColor(.black)
                                         HStack{
                                             Spacer()
-                                            NavigationLink(destination:ReviewExpandedView(review: comments )){
+                                            NavigationLink(destination:ReviewExpandedView(review: review )){
                                                 Text("more")
                                             }
                                         }
@@ -47,7 +47,6 @@ struct DetailReviewView: View {
                                 .padding([.top, .leading, .trailing], 25)
                         }
                     }
-//                    .padding(25)
                 }
             }
             .navigationTitle("Review")

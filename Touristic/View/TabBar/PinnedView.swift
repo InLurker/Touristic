@@ -31,7 +31,7 @@ struct PinnedView: View {
                     List{
                         Section {
                             ForEach(filteredTripList, id: \.self) { trip in
-                                NavigationLink(destination: TripActivityView()) {
+                                NavigationLink(destination: TripActivityView(trip: trip)) {
                                     HStack {
                                         Image(systemName: "photo")
                                             .resizable()
@@ -41,7 +41,7 @@ struct PinnedView: View {
                                             .clipped()
                                         VStack(alignment: .leading) {
                                             Text(trip.name ?? "Trip Name")
-                                            Text("0 Activity")
+                                            Text(activityCountFormatter(count: trip.places?.count ?? 0))
                                         }
                                         .padding(.horizontal, 10)
                                         Spacer()
@@ -67,7 +67,7 @@ struct PinnedView: View {
                         .padding(.horizontal)
                 })
                 .sheet(isPresented: $isShowingModalNewTrip) {
-                    NewTripModal(
+                    NewTripModal (
                         onCreateTrip: { tripName in
                             let success = DataRepository.shared.createTrip(
                                 context: viewContext,
@@ -116,12 +116,5 @@ struct PinnedView: View {
                 // Handle error if trip deletion fails
             }
         }
-    }
-}
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PinnedView()
     }
 }
