@@ -28,7 +28,7 @@ struct ExploreView: View {
     var body: some View {
         NavigationStack{
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 14){
+                LazyVStack(alignment: .leading, spacing: 14) {
                     ForEach(fitleredPlace, id: \.place_id) { place in
                         NavigationLink(destination: DetailActivityView(detailPlace: place, CarouselItems: place.images)){
                             PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
@@ -82,11 +82,5 @@ struct ExploreView: View {
                 print(error)
             }
         }
-    }
-}
-
-struct ExploreView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExploreView()
     }
 }
