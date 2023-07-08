@@ -33,27 +33,41 @@ struct FilterInterestModal: View {
                         .fontWeight(.bold)
                     Spacer()
                     HStack{
-                        Text("*Active your location")
-                            .font(.caption)
-                        Image(systemName: "mappin.and.ellipse")
-                            .onTapGesture {
-                                dismiss()
-                            }
+//                        Text("*Active your location")
+//                            .font(.caption)
+//                            .foregroundColor(.black)
+//                        Image(systemName: "paperplane.circle")
+//                            .font(.title2)
+//                            .onTapGesture {
+//                                dismiss()
+//                            }
                     }
                     .onTapGesture {
                         dismiss()
                     }
                     .foregroundColor(.blue)
                 }
-                
-                TextField("Search Location", text: $destination)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color(UIColor.systemGray6))
+                    .frame(height:36)
+                    .overlay(
+                        HStack{
+                            TextField("Search Location", text: $destination)
+//                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                            Button(action:{
+                                dismiss()
+                            }){
+                                Image(systemName: "paperplane.circle")
+                                    .font(.title2)
+                            }
+                        }
+                            .padding(.horizontal,10)
+                    )
                 
                 Text("Interest")
                     .font(.title2)
                     .fontWeight(.bold)
-                
+                    .padding(.top,25)
                 WrappingHStack(models: Array(interestDict.keys).sorted(), viewGenerator: { interest in
                     InterestTagComponent(
                         interestID: interest,
