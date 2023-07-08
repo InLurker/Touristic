@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertKit
 
 struct AddToTripListModal: View {
     @Environment(\.dismiss) var dismiss
@@ -130,20 +131,36 @@ struct AddToTripListModal: View {
         tripsToAdd.forEach { trip in
             let success = DataRepository.shared.addPlaceToTrip(context: viewContext, trip: trip, placeID: place_id)
             if !success {
-                // Show alert for error when adding place to trip
-                showAlert = true
+                AlertKitAPI.present(
+                    title: "An error ocurred while saving.",
+                    icon: .error,
+                    style: .iOS17AppleMusic,
+                    haptic: .success
+                )
                 return // Abort the iterator
             }
+            
         }
 
         tripsToRemove.forEach { trip in
             let success = DataRepository.shared.removePlaceFromTrip(context: viewContext, trip: trip, placeID: place_id)
             if !success {
-                // Show alert for error when removing place from trip
-                showAlert = true
+                AlertKitAPI.present(
+                    title: "An error ocurred while saving.",
+                    icon: .error,
+                    style: .iOS17AppleMusic,
+                    haptic: .success
+                )
                 return // Abort the iterator
             }
         }
+        
+        AlertKitAPI.present(
+            title: "Changes saved.",
+            icon: .done,
+            style: .iOS17AppleMusic,
+            haptic: .success
+        )
     }
 }
 
@@ -173,14 +190,5 @@ struct RoundedCheckbox: View {
                 userSelectedTrip.append(trip)
             }
         }
-    }
-}
-
-
-struct AddToTripListModal_Previews: PreviewProvider {
-    static var previews: some View {
-        AddToTripListModal(
-            place_id: "I1"
-        )
     }
 }
