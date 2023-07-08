@@ -7,36 +7,23 @@
 
 import SwiftUI
 
-//let tagList = [
-//    TagModel(name: "Hiking"),
-//    TagModel(name: "Surfing"),
-//    TagModel(name: "Camping"),
-//    TagModel(name: "Picnic"),
-//    TagModel(name: "Sport"),
-//    TagModel(name: "Entertainment"),
-//    TagModel(name: "Dancing"),
-//    TagModel(name: "Shopping"),
-//    TagModel(name: "Healing"),
-//    TagModel(name: "Swimming"),
-//    TagModel(name: "Spiritual"),
-//    TagModel(name: "Cycling"),
-//    TagModel(name: "Snorkeling"),
-//    TagModel(name: "Diving"),
-//    TagModel(name: "Climbing"),
-//    TagModel(name: "Recreation"),
-//    TagModel(name: "Night Life"),
-//    TagModel(name: "Local"),
-//    TagModel(name: "Photography"),
-//    TagModel(name: "Aquatic Recreation"),
-//    TagModel(name: "Culinary"),
-//    TagModel(name: "Historical"),
-//    TagModel(name: "Gardening")
-//]
-
 struct FilterInterestModal: View {
+    @StateObject private var selectedInterestData = SelectedInterestData.shared
+    @Binding var selectedInterests: [String]
+    
+    @State private var temporarySelectedInterests: [String]
+    
     @Environment(\.dismiss) var dismiss
     @State private var destination : String = ""
-    @State private var selectedInterests: [String] = []
+    
+    init(selectedInterests: Binding<[String]> = .init(
+        get: { SelectedInterestData.shared.selectedInterests },
+        set: { SelectedInterestData.shared.selectedInterests = $0 }
+    )) {
+        _selectedInterests = selectedInterests
+        _temporarySelectedInterests = State(initialValue: selectedInterests.wrappedValue)
+    }
+    
     var body: some View {
         NavigationStack() {
             VStack(alignment: .leading) {
@@ -81,27 +68,23 @@ struct FilterInterestModal: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top,25)
-                WrappingHStack(models: tagList, viewGenerator: { tag in
+                WrappingHStack(models: Array(interestDict.keys).sorted(), viewGenerator: { interest in
                     InterestTagComponent(
-                        interest: tag.name,
-                        selectedInterests: $selectedInterests
+                        interestID: interest,
+                        selectedInterests: $temporarySelectedInterests
                     )
                 })
                 .horizontalSpacing(6)
                 .verticalSpacing(6)
-                
                 Spacer()
-                
-                
             }
             .padding(.vertical, 50)
             .padding(.horizontal, 20)
-            //            .navigationTitle("Choose Your Interest")
             .navigationBarTitle("Filter", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
-                    Button(action:{
-                        dismiss()
+                    Button(action: {
+                        onCancel()
                     }){
                         Text("Cancel")
                             .foregroundColor(Color.accentColor)
@@ -110,21 +93,32 @@ struct FilterInterestModal: View {
                     
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
-                    Button(action:{
-                        
-                    }){
+                    Button(action: {
+                        onDone()
+                    }) {
                         Text("Done")
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
                     }
-                    
                 }
-                
             }
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
-            
         }
+    }
+    
+    func onDone() {
+        selectedInterests = temporarySelectedInterests
+        selectedInterestData.selectedInterests = temporarySelectedInterests
+        selectedInterestData.saveSelectedInterests()
+        
+        dismiss()
+    }
+    
+    func onCancel() {
+        temporarySelectedInterests = selectedInterests
+        
+        dismiss()
     }
 }
 
@@ -133,4 +127,3 @@ struct FilterInterestModal_Previews: PreviewProvider {
         FilterInterestModal()
     }
 }
-

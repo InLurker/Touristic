@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct DetailReviewView: View {
-    @ObservedObject private var reviewListing = ListReview.list
+//    @ObservedObject private var reviewListing = ListReview.list
+    
+    @State var reviews : [ReviewAdapter]
     @State private var reviewExpanded = false
     var body: some View {
         NavigationStack(){
             VStack{
                 ScrollView{
-                    ForEach(reviewListing.reviews, id: \.self){
+                    ForEach(reviews, id: \.id){
                         comments in
                         NavigationLink(destination: TripActivityView()){
                             RoundedRectangle(cornerRadius: 10)
@@ -23,7 +25,7 @@ struct DetailReviewView: View {
                                 .overlay(
                                     VStack{
                                         HStack{
-                                            Text("\(comments)")
+                                            Text("\(comments.name)")
                                             Spacer()
                                             Image(systemName: "star.fill")
                                             Text("5")
@@ -35,7 +37,7 @@ struct DetailReviewView: View {
                                             .foregroundColor(.black)
                                         HStack{
                                             Spacer()
-                                            NavigationLink(destination:ReviewExpandedView()){
+                                            NavigationLink(destination:ReviewExpandedView(review: comments )){
                                                 Text("more")
                                             }
                                         }
@@ -57,6 +59,6 @@ struct DetailReviewView: View {
 
 struct DetailReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailReviewView()
+        DetailReviewView(reviews: [ReviewAdapter(id: "r1", place_id: "p1", name: "toreto", description: "lorem", rating: 5.0)])
     }
 }

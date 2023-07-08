@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertKit
 
 struct NewTripModal: View {
     @Environment(\.dismiss) var dismiss
@@ -24,18 +25,11 @@ struct NewTripModal: View {
                     .padding()
                     .textFieldStyle(.roundedBorder)
                 
-                Button(action: {
-                    if tripName.isEmpty {
-                        // Pass "TripName" to the parent view when the TextField is empty
-                        onCreateTrip?("TripName")
-                    } else {
-                        
-                        // Notify the parent view about the new trip
-                        onCreateTrip?(tripName)
+                Button(
+                    action: {
+                        onAddNewTrip()
                     }
-                    
-                    dismiss()
-                }) {
+                ) {
                     Spacer()
                     Text("Create Trip!")
                     Spacer()
@@ -46,9 +40,11 @@ struct NewTripModal: View {
             .navigationBarTitle("Trip", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
-                    Button(action:{
-                        dismiss()
-                    }){
+                    Button(
+                        action: {
+                            dismiss()
+                        }
+                    ) {
                         Text("Cancel")
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
@@ -56,18 +52,11 @@ struct NewTripModal: View {
                     
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        if tripName.isEmpty {
-                            // Pass "TripName" to the parent view when the TextField is empty
-                            onCreateTrip?("TripName")
-                        } else {
-                            // Handle the "Done" button action
-                            
-                            // Notify the parent view about the new trip
-                            onCreateTrip?(tripName)
+                    Button(
+                        action: {
+                            onAddNewTrip()
                         }
-                        dismiss()
-                    }) {
+                    ) {
                         Text("Done")
                             .foregroundColor(Color.accentColor)
                             .padding(.horizontal)
@@ -78,15 +67,24 @@ struct NewTripModal: View {
             .toolbarBackground(.visible, for: .navigationBar)
         }
     }
-}
-
-struct NewTripView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewTripModal(
-            onCreateTrip: { tripName in
-                print(tripName)
-                
-            }
+    
+    func onAddNewTrip() {
+        if tripName.isEmpty {
+            // Pass "TripName" to the parent view when the TextField is empty
+            onCreateTrip?("Trip")
+        } else {
+            // Handle the "Done" button action
+            
+            // Notify the parent view about the new trip
+            onCreateTrip?(tripName)
+        }
+        
+        AlertKitAPI.present(
+            title: "New trip added.",
+            icon: .done,
+            style: .iOS17AppleMusic,
+            haptic: .success
         )
+        dismiss()
     }
 }

@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct InterestTagComponent: View {
-    let interest: String
+    let interestID: String
     @Binding var selectedInterests: [String]
     
     var isSelected: Bool {
-        selectedInterests.contains(interest)
+        selectedInterests.contains(interestID)
     }
     
     var body: some View {
@@ -14,7 +14,7 @@ struct InterestTagComponent: View {
                 toggleSelected()
             }
         ) {
-            Text(interest)
+            Text(interestDict[interestID]?.capitalized ?? "Interest")
                 .foregroundColor(isSelected ? .white : .primary)
         }
         .padding(.vertical, 5)
@@ -25,10 +25,10 @@ struct InterestTagComponent: View {
     
     func toggleSelected() {
         if isSelected {
-            selectedInterests.removeAll(where: { $0 == interest })
+            selectedInterests.removeAll(where: { $0 == interestID })
         } else {
             if selectedInterests.count < 5 {
-                selectedInterests.append(interest)
+                selectedInterests.append(interestID)
             }
         }
     }
