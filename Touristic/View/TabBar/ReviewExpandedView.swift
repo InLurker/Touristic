@@ -11,25 +11,23 @@ struct ReviewExpandedView: View {
     @State var review : ReviewAdapter
     var body: some View {
         NavigationStack(){
-            VStack{
-                RoundedRectangle(cornerRadius: 10)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(Color(UIColor.systemGray6))
-                    .overlay(
-                        ScrollView{
-                            VStack{
-                                HStack{
-                                    Text(review.name)
-                                    Spacer()
-                                    Image(systemName: "star.fill")
-                                    Text(String(review.rating))
-                                }
-                                Spacer()
-                                Text(review.description)
-                            }
-                            .padding(16)
-                        }
-                    )
+            
+            ScrollView {
+                VStack(alignment: .leading){
+                    HStack{
+                        Text(review.name)
+                            .bold()
+                        Spacer()
+                        Image(systemName: "star.fill")
+                        Text(String(removeTrailingZero(review.rating)))
+                    }
+                    Spacer()
+                    Text(review.description)
+                }
+                .padding(16)
+                .frame(maxWidth: .infinity)
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(10)
             }
             .padding(25)
             .navigationTitle("Review")
@@ -38,6 +36,7 @@ struct ReviewExpandedView: View {
         }
     }
 }
+
 
 struct ReviewExpandedView_Previews: PreviewProvider {
     static var previews: some View {
