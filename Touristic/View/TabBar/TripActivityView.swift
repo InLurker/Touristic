@@ -6,19 +6,36 @@
 //
 
 import SwiftUI
+import CoreData
+import AlertKit
 
 struct TripActivityView: View {
-    @ObservedObject private var ActivityCount = TripActivitySet.activityShared
     @State private var opacityChanged = 0.0
     @State private var isBouncing = false
+    
+    var trip: Trip
+    var placesInList: FetchRequest<Place>
+    
+    init(trip: Trip) {
+        self.trip = trip
+        
+        let fetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+        fetchRequest.sortDescriptors = []
+        fetchRequest.predicate = NSPredicate(format: "trip == %@", argumentArray: [trip])
+        
+        self.placesInList = FetchRequest(fetchRequest: fetchRequest)
+    }
+    
+    @State var placeAdapters: [PlaceAdapter] = []
+    
     var body: some View {
         NavigationStack(){
             VStack{
                 ZStack{
-                    if  ActivityCount.tripActivity.count < 1{
+                    if (trip.places?.count ?? 0 < 1) {
                         Text("You don’t have any pinned activites yet")
                             .multilineTextAlignment(.center)
-                        HStack{
+                        HStack {
                             VStack{
                                 Spacer()
                                 Text("Click Here to Explore")
@@ -32,30 +49,60 @@ struct TripActivityView: View {
                             Spacer()
                         }
                         .task{
-                            withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()){
+                            withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()) {
                                 self.opacityChanged = 1.0
                                 self.isBouncing = true
                             }
                         }
                     }
                     else{
-                        ForEach(ActivityCount.tripActivity, id: \.self){activities in
-                            NavigationLink(destination: TripActivityView()){
-                                Text("\(activities)")
+                        NavigationStack {
+                            ScrollView {
+                                LazyVStack(alignment: .leading, spacing: 14) {
+                                    ForEach(placeAdapters, id: \.place_id) { place in
+                                        PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
+                                    }
+                                }
+                                .padding(.vertical, 14)
+                                .padding(.horizontal, 25)
                             }
+                            .frame(maxHeight: .infinity)
+                        }.onAppear {
+                            retrievePlacesInList()
                         }
                     }
                 }
             }
-            .navigationTitle("Trip 1")
+            .navigationTitle(trip.name ?? "Trip Name")
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
     }
-}
-
-struct TripActivityView_Previews: PreviewProvider {
-    static var previews: some View {
-        TripActivityView()
+    
+    func showPlaceRetrievalError() {
+        AlertKitAPI.present(
+            title: "Error ocurred while retrieving place.",
+            icon: .error,
+            style: .iOS17AppleMusic,
+            haptic: .error
+        )
+    }
+    
+    func retrievePlacesInList() {
+        placesInList.wrappedValue.forEach { place in
+            guard let placeID = place.place_id else {
+                showPlaceRetrievalError()
+                return
+            }
+            getPlaceById(place_id: placeID) { result in
+                switch result {
+                case .success(let place):
+                    placeAdapters.append(place)
+                case .failure(let error):
+                    print(error)
+                    showPlaceRetrievalError()
+                }
+            }
+        }
     }
 }

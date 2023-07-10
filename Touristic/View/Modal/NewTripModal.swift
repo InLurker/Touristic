@@ -35,8 +35,10 @@ struct NewTripModal: View {
                     Spacer()
                 }
                 .buttonStyle(.borderedProminent)
-                .padding(.horizontal)
+                .foregroundColor(Color.white)
+                .padding(.horizontal, 14)
             }
+            .padding(.horizontal)
             .navigationBarTitle("Trip", displayMode: .inline)
             .toolbar{
                 ToolbarItem(placement: .navigationBarLeading){
@@ -59,6 +61,7 @@ struct NewTripModal: View {
                     ) {
                         Text("Done")
                             .foregroundColor(Color.accentColor)
+                        
                             .padding(.horizontal)
                     }
                 }
