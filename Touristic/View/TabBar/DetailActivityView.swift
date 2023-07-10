@@ -9,15 +9,15 @@ import SwiftUI
 import MapKit
 
 struct DetailActivityView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @State private var isExpanded = false
     @State private var reviewExpanded = false
     @State var detailPlace : PlaceAdapter
     @State var CarouselItems : [String] = []
-    @State private var CarouselCounter = 0
-    @State private var carouselColor: Color = .black
+    @State var pinIcon = "pin"
+    @State var isShowAddToTripModal = false
     var body: some View {
         NavigationStack(){
-            VStack{
                 ScrollView{
                     VStack{
                         TabView {
@@ -44,25 +44,37 @@ struct DetailActivityView: View {
                             }
                         }.tabViewStyle(PageTabViewStyle())
                             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                            .frame(height: 310)
+                            .frame(height: 250)
                     }
-                        VStack{
-                            HStack{
-                                Text("\(detailPlace.name)")
-                                Spacer()
-                                Image(systemName: "pin")
+                    VStack{
+                        HStack{
+                            Text("\(detailPlace.name)")
+                                .font(.title)
+                            Spacer()
+                            Button(
+                                action: {
+                                    isShowAddToTripModal = true
+                                }
+                            ) {
+                                Image(systemName: pinIcon)
+                                    .foregroundColor(.accentColor)
                             }
-                            .frame(maxWidth: .infinity)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .padding(.bottom,7)
+                            .onChange(of: isShowAddToTripModal) { isBeingShown in
+                                if !isBeingShown {
+                                    checkForPin()
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .padding(.bottom,7)
+                        HStack {
                             Text("\(detailPlace.description)")
                                 .lineLimit(isExpanded ? nil : 3)
                                 .fixedSize(horizontal: false, vertical: true)
-                            
-                            HStack {
+                            VStack{
                                 Spacer()
-                                
                                 Button(action: {
                                     isExpanded.toggle()
                                 }) {
@@ -71,23 +83,33 @@ struct DetailActivityView: View {
                                 }
                             }
                         }
-                        VStack{
+                    }
+                    .padding([.horizontal,.vertical],25)
+                    VStack{
+                        HStack{
+                            Text("Price")
+                                .padding(.bottom,7)
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        ForEach(detailPlace.prices, id: \.place_id) { price in
                             HStack{
-                                Text("Price")
-                                    .padding(.bottom,7)
+                                Image(systemName: "figure.walk")
+                                    .foregroundColor(.yellow)
+                                Text("\(price.type) : \(price.price)")
                                 Spacer()
+                                
                             }
-                            .frame(maxWidth: .infinity)
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            ForEach(detailPlace.prices, id: \.place_id) { price in
+                            .padding(.bottom,25)
+                            VStack{
                                 HStack{
-                                    Image(systemName: "figure.walk")
-                                        .foregroundColor(.yellow)
-                                        .padding(.horizontal,24)
-                                    Text("\(price.type) : \(price.price)")
+                                    Text("Activites")
+                                        .padding(.bottom,7)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
                                     Spacer()
-                                    
                                 }
                                 LazyVStack (alignment: .leading){
                                     let columnCount = 2
@@ -105,7 +127,6 @@ struct DetailActivityView: View {
                                                         Text("\(interest)")
                                                         Spacer()
                                                     }
-                                                    .padding(.bottom, 16)
                                                     
                                                 } else {
                                                     Spacer()
@@ -115,11 +136,13 @@ struct DetailActivityView: View {
                                         
                                     }
                                 }
+                            }
                             
                             .padding(.bottom,25)
                             VStack{
                                 HStack{
                                     Text("Review")
+                                        .padding(.bottom,7)
                                         .font(.title2)
                                         .fontWeight(.bold)
                                     Image(systemName: "star.fill")
@@ -176,14 +199,27 @@ struct DetailActivityView: View {
                             }
                             
                         }
-                        .padding(.horizontal,25)
                     }
-                }
+                    .padding(.horizontal,25)
             }
-            .navigationTitle("Detail")
+                .navigationBarTitle("Place Details")
             .toolbarBackground(Color(UIColor.systemGray6), for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
         }
+        .sheet(isPresented: $isShowAddToTripModal) {
+            AddToTripListModal(
+                place_id: detailPlace.place_id
+            )
+            .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
+            .presentationDragIndicator(.automatic)
+        }
+        .onAppear{
+            checkForPin()
+        }
+    }
+    func checkForPin() {
+        let placeIsPinned = DataRepository.shared.isPlacePinned(context: viewContext, placeID: detailPlace.place_id)
+        pinIcon = placeIsPinned ? "pin.fill" : "pin"
     }
 }
 
@@ -191,6 +227,7 @@ struct DetailActivityView_Previews: PreviewProvider {
     static var previews: some View {
         DetailActivityView(detailPlace: PlaceAdapter(place_id: "p1", name: "Bali", description: "Lorem", latitude: 9.29283, longitude: -1.2037972, interest: ["oke", "ok", "u", "o"], images: ["oke"], reviews: [ReviewAdapter(id: "r1", place_id: "p1", name: "toreto", description: "lorem", rating: 5.0)], avg_rating: "5.0", prices: [Prices(id: "c1", place_id: "p1", type: "entry", price: "Rp 100.000")]), CarouselItems: ["photo.fill","photo","photo.tv"])
     }
+    
 }
 
 
