@@ -28,7 +28,7 @@ struct DetailReviewView: View {
                                             Text("\(comments.name)")
                                             Spacer()
                                             Image(systemName: "star.fill")
-                                            Text("5")
+                                            Text("\(removeTrailingZero(review.rating))")
                                         }
                                         .foregroundColor(.black)
                                         Spacer()
