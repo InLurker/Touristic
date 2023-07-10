@@ -37,10 +37,16 @@ struct Prices : Codable {
     let price: String
 }
 
-struct PlaceResponse: Codable {
+struct PlaceListResponse: Codable {
     let success: Bool
     let message: String
     let data: [PlaceAdapter]
+}
+
+struct PlaceResponse: Codable {
+    let success: Bool
+    let message: String
+    let data: PlaceAdapter
 }
 
 func getPlacesByInterest(interests: [String], completion: @escaping (Result<[PlaceAdapter], Error>) -> Void) {
@@ -66,7 +72,7 @@ func getPlacesByInterest(interests: [String], completion: @escaping (Result<[Pla
         
         do {
             let decoder = JSONDecoder()
-            let response = try decoder.decode(PlaceResponse.self, from: data)
+            let response = try decoder.decode(PlaceListResponse.self, from: data)
             completion(.success(response.data))
             
         } catch {
@@ -75,16 +81,46 @@ func getPlacesByInterest(interests: [String], completion: @escaping (Result<[Pla
     }.resume()
 }
 
+func getPlaceById(place_id: String, completion: @escaping (Result<PlaceAdapter, Error>) -> Void) {
+    let urlString = "https://touristic.masbek.my.id/api/get-place/\(place_id)"
+    
+    guard let url = URL(string: urlString) else {
+        completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+        return
+    }
+    
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+        
+        guard let data = data else {
+            completion(.failure(NSError(domain: "No data received", code: 0, userInfo: nil)))
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(PlaceResponse.self, from: data)
+            completion(.success(result.data))
+        } catch {
+            completion(.failure(error))
+        }
+    }.resume()
+}
+
+
 struct GetAPITest: View {
-    @State private var places: [PlaceAdapter] = []
+    @State private var place: PlaceAdapter? = nil
     
     var body: some View {
         VStack {
             Button(action: {
-                getPlacesByInterest(interests: ["I6","I9"]) { result in
+                getPlaceById(place_id: "P10") { result in
                     switch result {
-                    case .success(let places):
-                        self.places = places
+                    case .success(let place):
+                        self.place = place
                     case .failure(let error):
                         print(error)
                     }
@@ -95,9 +131,7 @@ struct GetAPITest: View {
             .buttonStyle(.borderedProminent)
             
             // Display the result
-            List(places, id: \.place_id) { place in
-                Text(place.avg_rating)
-            }
+            Text(place?.name ?? "No name")
         }
     }
 }

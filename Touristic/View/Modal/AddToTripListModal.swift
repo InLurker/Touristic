@@ -39,8 +39,8 @@ struct AddToTripListModal: View {
                     }
                 }
                 .buttonStyle(.borderedProminent)
+                .foregroundColor(Color.white)
                 .frame(height: 40) // Adjust the height as needed
-                
                 ForEach(tripList, id: \.self) { trip in
                     HStack {
                         Image(systemName: "photo")
@@ -52,7 +52,7 @@ struct AddToTripListModal: View {
                         
                         VStack(alignment: .leading) {
                             Text(trip.name ?? "Trip Name")
-                            Text("0 Activity")
+                            Text(activityCountFormatter(count: trip.places?.count ?? 0))
                         }
                         .padding(.horizontal, 10)
                         
@@ -62,9 +62,9 @@ struct AddToTripListModal: View {
                             trip: trip,
                             userSelectedTrip: $userSelectedTrip
                         )
+                        .padding(.horizontal, 2)
                     }
                     .padding(.vertical, 14)
-                    .padding(.horizontal, 40)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
             }
@@ -139,7 +139,6 @@ struct AddToTripListModal: View {
                 )
                 return // Abort the iterator
             }
-            
         }
 
         tripsToRemove.forEach { trip in

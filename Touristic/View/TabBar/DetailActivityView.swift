@@ -146,13 +146,13 @@ struct DetailActivityView: View {
                                     .frame(height: 113)
                                     .foregroundColor(Color(UIColor.systemGray6))
                                     .overlay(
-                                        VStack{
+                                        VStack(alignment: .leading){
                                             HStack{
                                                 Text(detailPlace.reviews.first?.name ?? "Review name")
-                                                Text("ok")
+                                                    .bold()
                                                 Spacer()
                                                 Image(systemName: "star.fill")
-                                                Text(String(detailPlace.reviews.first?.rating ?? 5.0))
+                                                Text(String(removeTrailingZero(detailPlace.reviews.first?.rating ?? 5.0)))
                                             }
                                             Spacer()
                                             Text(detailPlace.reviews.first?.description ?? "lor")
