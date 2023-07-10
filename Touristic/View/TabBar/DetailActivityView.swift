@@ -45,6 +45,7 @@ struct DetailActivityView: View {
                         }.tabViewStyle(PageTabViewStyle())
                             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                             .frame(height: 310)
+                    }
                         VStack{
                             HStack{
                                 Text("\(detailPlace.name)")
@@ -58,6 +59,7 @@ struct DetailActivityView: View {
                             Text("\(detailPlace.description)")
                                 .lineLimit(isExpanded ? nil : 3)
                                 .fixedSize(horizontal: false, vertical: true)
+                            
                             HStack {
                                 Spacer()
                                 
@@ -68,64 +70,52 @@ struct DetailActivityView: View {
                                         .foregroundColor(.blue)
                                 }
                             }
-                            VStack{
+                        }
+                        VStack{
+                            HStack{
+                                Text("Price")
+                                    .padding(.bottom,7)
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            ForEach(detailPlace.prices, id: \.place_id) { price in
                                 HStack{
-                                    Text("Price")
-                                        .padding(.bottom,7)
+                                    Image(systemName: "figure.walk")
+                                        .foregroundColor(.yellow)
+                                        .padding(.horizontal,24)
+                                    Text("\(price.type) : \(price.price)")
                                     Spacer()
+                                    
                                 }
-                                .frame(maxWidth: .infinity)
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                ForEach(detailPlace.prices, id: \.place_id) { price in
-                                    HStack{
-                                        Image(systemName: "figure.walk")
-                                            .foregroundColor(.yellow)
-                                            .padding(.horizontal,24)
-                                        Text("Adult : Rp. 30.000")
-                                        Spacer()
+                                LazyVStack (alignment: .leading){
+                                    let columnCount = 2
+                                    let rowCount = (detailPlace.interest.count + columnCount - 1) / columnCount
+                                    
+                                    ForEach(0..<rowCount) { rowIndex in
+                                        HStack(spacing: 16) {
+                                            ForEach(0..<columnCount) { columnIndex in
+                                                let index = rowIndex * columnCount + columnIndex
+                                                if index < detailPlace.interest.count {
+                                                    let interest = detailPlace.interest[index]
+                                                    
+                                                    HStack {
+                                                        Image(systemName: "pin")
+                                                        Text("\(interest)")
+                                                        Spacer()
+                                                    }
+                                                    .padding(.bottom, 16)
+                                                    
+                                                } else {
+                                                    Spacer()
+                                                }
+                                            }
+                                        }
                                         
                                     }
                                 }
-                                //                                HStack{
-                                //                                    Image(systemName: "figure.walk")
-                                //                                        .font(.custom("", size: 10))
-                                //                                        .foregroundColor(.red)
-                                //                                        .padding(.horizontal,27)
-                                //                                    Text("Adult : Rp. 20.000")
-                                //                                    Spacer()
-                                //                                }
-                            }
-                            .padding(.bottom,25)
-                            VStack{
-                                HStack{
-                                    Text("Activities")
-                                        .padding(.bottom,7)
-                                    Spacer()
-                                }
-                                .frame(maxWidth: .infinity)
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                ForEach(detailPlace.interest, id: \.self) { interest in
-                                    HStack{
-                                        Image(systemName: "pin")
-                                        Text("Activity")
-                                        Spacer()
-                                        //                                        Image(systemName: "pin")
-                                        //                                        Text("Activity")
-                                        //                                        Spacer()
-                                    }
-                                    .padding(.bottom,16)
-                                }
-                                //                                HStack{
-                                //                                    Image(systemName: "pin")
-                                //                                    Text("Activity")
-                                //                                    Spacer()
-                                //                                    Image(systemName: "pin")
-                                //                                    Text("Activity")
-                                //                                    Spacer()
-                                //                                }
-                            }
+                            
                             .padding(.bottom,25)
                             VStack{
                                 HStack{
