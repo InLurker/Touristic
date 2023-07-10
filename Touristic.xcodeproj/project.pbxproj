@@ -17,6 +17,7 @@
 		7D0D9DBF2A496F8F00843298 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DBC2A496F8F00843298 /* ExploreView.swift */; };
 		7D0D9DC32A49936100843298 /* TripsData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D9DC12A49936100843298 /* TripsData.xcdatamodeld */; };
 		7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D265A312A4997E30025B785 /* PlacesCardView.swift */; };
+		7D4CB5342A5BE8170073A383 /* RemoveTrailingZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4CB5332A5BE8170073A383 /* RemoveTrailingZero.swift */; };
 		7D60C4A42A444D8000BFB6B6 /* TouristicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */; };
 		7D60C4A62A444D8000BFB6B6 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */; };
 		7D60C4A82A444D8200BFB6B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D60C4A72A444D8200BFB6B6 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		7D0D9DBD2A496F8F00843298 /* NewTripModal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTripModal.swift; sourceTree = "<group>"; };
 		7D0D9DC22A49936100843298 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7D265A312A4997E30025B785 /* PlacesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesCardView.swift; sourceTree = "<group>"; };
+		7D4CB5332A5BE8170073A383 /* RemoveTrailingZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveTrailingZero.swift; sourceTree = "<group>"; };
 		7D60C4A02A444D8000BFB6B6 /* Touristic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Touristic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D60C4A32A444D8000BFB6B6 /* TouristicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristicApp.swift; sourceTree = "<group>"; };
 		7D60C4A52A444D8000BFB6B6 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				7D6DAF272A56B30B0055447B /* ActivityCountFormatter.swift */,
+				7D4CB5332A5BE8170073A383 /* RemoveTrailingZero.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			files = (
 				7DD836EC2A5417560018C0E3 /* NewTripModal.swift in Sources */,
 				21DDA15F2A49754200048135 /* TripActivityView.swift in Sources */,
+				7D4CB5342A5BE8170073A383 /* RemoveTrailingZero.swift in Sources */,
 				DD8D93C42A56688A005CDD31 /* MapView.swift in Sources */,
 				DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */,
 				7DE43E0C2A4C1E3B00A33892 /* DataRepository.swift in Sources */,
