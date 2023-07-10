@@ -30,10 +30,10 @@ struct ExploreView: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 14) {
                     ForEach(fitleredPlace, id: \.place_id) { place in
-                        NavigationLink(destination: DetailActivityView(detailPlace: place, CarouselItems: place.images)){
-                            PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
+                        NavigationLink(destination: DetailActivityView(detailPlace: place)) {
+                            PlacesCardView(place: place)
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                     }
                 }
                 .onChange(of: _selectedInterests.wrappedValue) { _ in

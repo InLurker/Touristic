@@ -14,8 +14,9 @@ struct TripActivityView: View {
     @State private var isBouncing = false
     
     var trip: Trip
-    var placesInList: FetchRequest<Place>
     
+    @FetchRequest var placesInList: FetchedResults<Place>
+        
     init(trip: Trip) {
         self.trip = trip
         
@@ -23,7 +24,7 @@ struct TripActivityView: View {
         fetchRequest.sortDescriptors = []
         fetchRequest.predicate = NSPredicate(format: "trip == %@", argumentArray: [trip])
         
-        self.placesInList = FetchRequest(fetchRequest: fetchRequest)
+        self._placesInList = FetchRequest(fetchRequest: fetchRequest)
     }
     
     @State var placeAdapters: [PlaceAdapter] = []
@@ -33,7 +34,7 @@ struct TripActivityView: View {
             VStack{
                 ZStack{
                     if (trip.places?.count ?? 0 < 1) {
-                        Text("You don’t have any pinned activites yet")
+                        Text("You don’t have any pinned activities yet")
                             .multilineTextAlignment(.center)
                         HStack {
                             VStack{
@@ -48,29 +49,34 @@ struct TripActivityView: View {
                             .frame(width: UIScreen.main.bounds.size.width / 2, height: UIScreen.main.bounds.size.height / 8 * 4.5)
                             Spacer()
                         }
-                        .task{
+                        .task {
                             withAnimation(Animation.easeInOut(duration: 1.5).repeatForever()) {
                                 self.opacityChanged = 1.0
                                 self.isBouncing = true
                             }
                         }
-                    }
-                    else{
+                    } else {
                         NavigationStack {
                             ScrollView {
                                 LazyVStack(alignment: .leading, spacing: 14) {
                                     ForEach(placeAdapters, id: \.place_id) { place in
-                                        PlacesCardView(placeID: place.place_id, interests: place.interest, name: place.name, images: place.images)
+                                        NavigationLink(destination: DetailActivityView(detailPlace: place)) {
+                                            PlacesCardView(place: place)
+                                        }
+                                        .foregroundColor(.primary)
                                     }
+                                }
+                                .onChange(of: Array(placesInList)) { _ in
+                                    retrievePlacesInList()
                                 }
                                 .padding(.vertical, 14)
                                 .padding(.horizontal, 25)
                             }
-                            .frame(maxHeight: .infinity)
-                        }.onAppear {
-                            retrievePlacesInList()
                         }
                     }
+                }
+                .onAppear{
+                    retrievePlacesInList()
                 }
             }
             .navigationTitle(trip.name ?? "Trip Name")
@@ -81,15 +87,17 @@ struct TripActivityView: View {
     
     func showPlaceRetrievalError() {
         AlertKitAPI.present(
-            title: "Error ocurred while retrieving place.",
+            title: "Error occurred while retrieving place.",
             icon: .error,
             style: .iOS17AppleMusic,
             haptic: .error
         )
     }
     
+    
     func retrievePlacesInList() {
-        placesInList.wrappedValue.forEach { place in
+        placeAdapters.removeAll()
+        placesInList.forEach { place in
             guard let placeID = place.place_id else {
                 showPlaceRetrievalError()
                 return
