@@ -53,7 +53,6 @@ struct FilterInterestModal: View {
                     .overlay(
                         HStack{
                             TextField("Search Location", text: $destination)
-//                    .textFieldStyle(RoundedBorderTextFieldStyle())
                             Button(action:{
                                 dismiss()
                             }){

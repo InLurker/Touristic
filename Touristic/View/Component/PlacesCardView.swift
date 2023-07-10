@@ -53,7 +53,7 @@ struct PlacesCardView: View {
                 .padding(.top, 13)
                 .padding(.horizontal, 9)
                 
-                Text(interests.joined(separator: " · "))
+                Text(interests.joined(separator: " · ").capitalized)
                     .lineLimit(1)
                     .font(.caption)
                     .padding(.horizontal, 9)
