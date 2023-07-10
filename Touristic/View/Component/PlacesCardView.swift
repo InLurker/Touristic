@@ -10,6 +10,13 @@ import SwiftUI
 struct PlacesCardView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    init (place: PlaceAdapter) {
+        self.placeID = place.place_id
+        self.interests = place.interest
+        self.name = place.name
+        self.images = place.images
+    }
+    
     var placeID : String
     var interests : [String] = []
     var name : String = ""

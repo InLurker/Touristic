@@ -11,7 +11,6 @@ struct ReviewExpandedView: View {
     @State var review : ReviewAdapter
     var body: some View {
         NavigationStack(){
-            
             ScrollView {
                 VStack(alignment: .leading){
                     HStack{

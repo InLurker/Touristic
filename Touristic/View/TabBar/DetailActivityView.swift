@@ -12,17 +12,23 @@ struct DetailActivityView: View {
     @State private var isExpanded = false
     @State private var reviewExpanded = false
     @State var detailPlace : PlaceAdapter
-    @State var CarouselItems : [String] = []
-    @State private var CarouselCounter = 0
+    @State var carouselItems : [String]
+    @State private var carouselCounter = 0
     @State private var carouselColor: Color = .black
+    
+    init(detailPlace: PlaceAdapter) {
+        self.detailPlace = detailPlace
+        self.carouselItems = detailPlace.images
+    }
+    
     var body: some View {
         NavigationStack(){
             VStack{
                 ScrollView{
                     VStack{
                         TabView {
-                            ForEach(0..<CarouselItems.count, id: \.self) { index in
-                                AsyncImage(url: URL(string: CarouselItems[index])) { phase in
+                            ForEach(0..<carouselItems.count, id: \.self) { index in
+                                AsyncImage(url: URL(string: carouselItems[index])) { phase in
                                     switch phase {
                                     case .empty:
                                         Image(systemName: "photo")
@@ -189,7 +195,7 @@ struct DetailActivityView: View {
 
 struct DetailActivityView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailActivityView(detailPlace: PlaceAdapter(place_id: "p1", name: "Bali", description: "Lorem", latitude: 9.29283, longitude: -1.2037972, interest: ["oke", "ok", "u", "o"], images: ["oke"], reviews: [ReviewAdapter(id: "r1", place_id: "p1", name: "toreto", description: "lorem", rating: 5.0)], avg_rating: "5.0", prices: [Prices(id: "c1", place_id: "p1", type: "entry", price: "Rp 100.000")]), CarouselItems: ["photo.fill","photo","photo.tv"])
+        DetailActivityView(detailPlace: PlaceAdapter(place_id: "p1", name: "Bali", description: "Lorem", latitude: 9.29283, longitude: -1.2037972, interest: ["oke", "ok", "u", "o"], images: ["photo.fill","photo","photo.tv"], reviews: [ReviewAdapter(id: "r1", place_id: "p1", name: "toreto", description: "lorem", rating: 5.0)], avg_rating: "5.0", prices: [Prices(id: "c1", place_id: "p1", type: "entry", price: "Rp 100.000")]))
     }
 }
 
