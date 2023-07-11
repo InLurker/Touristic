@@ -8,6 +8,15 @@
         "revision" : "1da133b6f630f4e11d141ce5c05d09b68200278e",
         "version" : "5.0.1"
       }
+    },
+    {
+      "identity" : "expandabletext",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/n3d1117/ExpandableText",
+      "state" : {
+        "branch" : "main",
+        "revision" : "bd7e481de0ae3c38b2ee1713c09a499dba5c1db1"
+      }
     }
   ],
   "version" : 2

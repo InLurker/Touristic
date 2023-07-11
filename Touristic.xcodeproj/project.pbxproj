@@ -32,6 +32,7 @@
 		7DE43E112A4C3C7D00A33892 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E102A4C3C7D00A33892 /* DataController.swift */; };
 		7DE43E132A4ED8EF00A33892 /* InterestDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E122A4ED8EF00A33892 /* InterestDict.swift */; };
 		7DE43E1B2A52047E00A33892 /* SelectedInterestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E1A2A52047E00A33892 /* SelectedInterestData.swift */; };
+		7DFDC2A32A5C162200C566E3 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 7DFDC2A22A5C162200C566E3 /* ExpandableText */; };
 		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
 		DD8D93C42A56688A005CDD31 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D93C32A56688A005CDD31 /* MapView.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
@@ -74,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D6DAF252A56A0840055447B /* AlertKit in Frameworks */,
+				7DFDC2A32A5C162200C566E3 /* ExpandableText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +222,7 @@
 			name = Touristic;
 			packageProductDependencies = (
 				7D6DAF242A56A0840055447B /* AlertKit */,
+				7DFDC2A22A5C162200C566E3 /* ExpandableText */,
 			);
 			productName = Touristic;
 			productReference = 7D60C4A02A444D8000BFB6B6 /* Touristic.app */;
@@ -251,6 +254,7 @@
 			mainGroup = 7D60C4972A444D8000BFB6B6;
 			packageReferences = (
 				7D6DAF232A56A0840055447B /* XCRemoteSwiftPackageReference "AlertKit" */,
+				7DFDC2A12A5C162200C566E3 /* XCRemoteSwiftPackageReference "ExpandableText" */,
 			);
 			productRefGroup = 7D60C4A12A444D8000BFB6B6 /* Products */;
 			projectDirPath = "";
@@ -513,6 +517,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		7DFDC2A12A5C162200C566E3 /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/n3d1117/ExpandableText";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -520,6 +532,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D6DAF232A56A0840055447B /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
+		};
+		7DFDC2A22A5C162200C566E3 /* ExpandableText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DFDC2A12A5C162200C566E3 /* XCRemoteSwiftPackageReference "ExpandableText" */;
+			productName = ExpandableText;
 		};
 /* End XCSwiftPackageProductDependency section */
 
