@@ -16,8 +16,6 @@ struct ExploreView: View {
     @State var isShowingFilterModal : Bool = false
     @State var places: [PlaceAdapter] = []
     
-    
-    
     init(selectedInterests: Binding<[String]> = .init(
         get: { SelectedInterestData.shared.selectedInterests },
         set: { SelectedInterestData.shared.selectedInterests = $0 }
@@ -27,22 +25,37 @@ struct ExploreView: View {
     
     var body: some View {
         NavigationStack{
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 14) {
-                    ForEach(fitleredPlace, id: \.place_id) { place in
-                        NavigationLink(destination: DetailActivityView(detailPlace: place)) {
-                            PlacesCardView(place: place)
+            VStack {
+                if(places.count < 1) {
+                    Spacer()
+                    Text("No places match your interest selection.")
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                else if (filteredPlace.count < 1) {
+                    Spacer()
+                    Text("No places match your search query.")
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                }
+                else {
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 14) {
+                            ForEach(filteredPlace, id: \.place_id) { place in
+                                NavigationLink(destination: DetailActivityView(detailPlace: place)) {
+                                    PlacesCardView(place: place)
+                                }
+                                .foregroundColor(.primary)
+                            }
                         }
-                        .foregroundColor(.primary)
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 25)
                     }
                 }
-                .onChange(of: _selectedInterests.wrappedValue) { _ in
-                    fetchPlaceByInterest()
-                }
-                .padding(.vertical, 14)
-                .padding(.horizontal, 25)
             }
-            .frame(maxHeight: .infinity)
+            .onChange(of: _selectedInterests.wrappedValue) { _ in
+                fetchPlaceByInterest()
+            }
             .navigationTitle("Explore")
             .searchable(text: $searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "Activities Name") {        }
             .toolbar {
@@ -66,7 +79,7 @@ struct ExploreView: View {
         }
     }
     
-    var fitleredPlace: [PlaceAdapter] {
+    var filteredPlace: [PlaceAdapter] {
         if searchQuery.isEmpty {
             return places
         }else { return places.filter { $0.name.lowercased().contains(searchQuery.lowercased()) }

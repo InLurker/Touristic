@@ -27,6 +27,7 @@ struct DetailActivityView: View {
     var body: some View {
         NavigationStack(){
             ScrollView{
+                
                 VStack{
                     TabView {
                         ForEach(carouselItems, id:\.self) { item in
@@ -55,6 +56,7 @@ struct DetailActivityView: View {
                     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                     .frame(height: 250)
                 }
+                
                 VStack{
                     HStack{
                         Text("\(detailPlace.name)")
@@ -77,13 +79,15 @@ struct DetailActivityView: View {
                     .frame(maxWidth: .infinity)
                     .font(.title2)
                     .fontWeight(.bold)
-                    .padding(.bottom,7)
+                    .padding(.bottom, 7)
                     ExpandableText(detailPlace.description)
                         .foregroundColor(.primary)
                         .lineLimit(3)
                         .moreButtonText("more")
                 }
                 .padding([.horizontal,.vertical],25)
+                
+                
                 VStack{
                     HStack{
                         Text("Price")
@@ -131,6 +135,7 @@ struct DetailActivityView: View {
                     
                     
                     VStack{
+                        
                         HStack(alignment: .center) {
                             Text("Review")
                                 .font(.title2)
@@ -145,6 +150,7 @@ struct DetailActivityView: View {
                         }
                         .padding(.bottom,7)
                         .frame(maxWidth: .infinity)
+                        
                         VStack(alignment: .leading) {
                             HStack{
                                 Text(detailPlace.reviews.first?.name ?? "Review name")
@@ -170,10 +176,12 @@ struct DetailActivityView: View {
                     .padding(.bottom,16)
                     
                     VStack(alignment: .leading) {
+                        
                         Text("Location")
                             .padding(.bottom,7)
                             .font(.title2)
                             .fontWeight(.bold)
+                        
                         VStack(alignment: .leading) {
                             Text(address)
                                 .font(.caption)
