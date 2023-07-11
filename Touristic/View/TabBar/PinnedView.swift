@@ -24,10 +24,23 @@ struct PinnedView: View {
     var body: some View {
         NavigationStack() {
             VStack{
-                if filteredTripList.count < 1 {
+                if trips.count < 1 {
+                    VStack{
+                        Spacer()
                         Text("You don’t have any pinned trips yet.\nAdd by clicking the '+' icon in the top right corner.")
                             .multilineTextAlignment(.center)
-                } else {
+                        Spacer()
+                    }
+                }
+                else if (filteredTripList.count < 1) {
+                    VStack{
+                        Spacer()
+                        Text("No trips match your search query.")
+                            .multilineTextAlignment(.center)
+                        Spacer()
+                    }
+                }
+                else {
                     List{
                         Section {
                             ForEach(filteredTripList, id: \.self) { trip in
