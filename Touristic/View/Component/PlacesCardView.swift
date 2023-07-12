@@ -66,7 +66,7 @@ struct PlacesCardView: View {
                     .padding(.horizontal, 9)
                     .padding(.bottom, 5)
                 Spacer()
-                AsyncImage(url: URL(string: images[0])) { phase in
+                AsyncImage(url: URL(string: images.first ?? "")) { phase in
                     switch phase {
                     case .empty:
                         Image(systemName: "photo")
@@ -112,7 +112,7 @@ struct PlacesCardView: View {
             }
             .padding(5)
             GeometryReader { geometry in
-                AsyncImage(url: URL(string: images[0])) { phase in
+                AsyncImage(url: URL(string: images.first ?? "")) { phase in
                     switch phase {
                     case .empty:
                         Image(systemName: "photo")
