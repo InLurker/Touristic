@@ -99,8 +99,9 @@ struct DetailActivityView: View {
                     .fontWeight(.bold)
                     ForEach(detailPlace.prices, id: \.place_id) { price in
                         HStack{
-                            Image(systemName: "figure.walk")
-                            Text("\(price.type.capitalized) : \(price.price)")
+                            Image(systemName: (price.type == "souvenir" ? "bag.fill" : price.type == "entry" ?  "banknote" : price.type == "fnb" ? "fork.knife" : price.type == "kid" ? "figure.mixed.cardio" : price.type == "adult" ? "figure.arms.open" : "figure.walk"))
+                                .foregroundColor(.primary)
+                            Text(" \(price.type.capitalized)    : \(price.price)")
                             Spacer()
                             
                         }
