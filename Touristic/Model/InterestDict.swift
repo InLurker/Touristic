@@ -31,3 +31,28 @@ let interestDict: [String: String] = [
     "I23": "local"
 ]
 
+let interestIcons: [String: String] = [
+    "I1": "figure.hiking",
+    "I2": "figure.surfing",
+    "I3": "tent.fill",
+    "I4": "figure.open.water.swim",
+    "I5": "water.waves.and.arrow.down",
+    "I6": "figure.water.fitness",
+    "I7": "figure.socialdance",
+    "I8": "cart.fill",
+    "I9": "theatermasks",
+    "I10": "gamecontroller.fill",
+    "I11": "building.2.crop.circle.fill",
+    "I12": "camera.on.rectangle.fill",
+    "I13": "figure.climbing",
+    "I14": "figure.outdoor.cycle",
+    "I15": "cup.and.saucer.fill",
+    "I16": "figure.run",
+    "I17": "hands.sparkles",
+    "I18": "bubbles.and.sparkles.fill",
+    "I19": "fish.circle",
+    "I20": "fork.knife",
+    "I21": "building.columns.fill",
+    "I22": "leaf.fill",
+    "I23": "signpost.and.arrowtriangle.up"
+]

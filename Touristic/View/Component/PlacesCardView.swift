@@ -15,12 +15,13 @@ struct PlacesCardView: View {
         self.interests = place.interest
         self.name = place.name
         self.images = place.images
+        self.averageRating = place.avg_rating
     }
-    
     var placeID : String
     var interests : [String] = []
     var name : String = ""
     var images : [String] = [""]
+    var averageRating: String
     @State var pinIcon = "pin"
     @State var isShowAddToTripModal = false
     
@@ -38,7 +39,7 @@ struct PlacesCardView: View {
                         .frame(
                             height: 13
                         )
-                    Text("4.7")
+                    Text(averageRating)
                         .lineLimit(1)
                         .font(.footnote)
                         .bold()
@@ -60,7 +61,7 @@ struct PlacesCardView: View {
                 .padding(.top, 13)
                 .padding(.horizontal, 9)
                 
-                Text(interests.joined(separator: " · ").capitalized)
+                Text(interests.compactMap { interestDict[$0]?.capitalized }.joined(separator: " · "))
                     .lineLimit(1)
                     .font(.caption)
                     .padding(.horizontal, 9)
@@ -119,7 +120,7 @@ struct PlacesCardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(height: geometry.size.height)
-                            .blur(radius: 4.0)
+                            .blur(radius: 18.0)
                             .cornerRadius(10)
                             .opacity(0.4)
                             .clipped()
@@ -128,7 +129,7 @@ struct PlacesCardView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(height: geometry.size.height)
                             .frame(width: geometry.size.width)
-                            .blur(radius: 4.0)
+                            .blur(radius: 18.0)
                             .cornerRadius(10)
                             .opacity(0.4)
                             .clipped()
@@ -137,6 +138,7 @@ struct PlacesCardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(height: geometry.size.height)
+                            .blur(radius: 18.0)
                             .cornerRadius(10)
                             .opacity(0.4)
                             .clipped()
@@ -145,6 +147,7 @@ struct PlacesCardView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(height: geometry.size.height)
+                            .blur(radius: 18.0)
                             .cornerRadius(10)
                             .opacity(0.4)
                             .clipped()

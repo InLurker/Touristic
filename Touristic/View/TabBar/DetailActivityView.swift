@@ -89,24 +89,27 @@ struct DetailActivityView: View {
                 
                 
                 VStack{
-                    HStack{
-                        Text("Price")
-                            .padding(.bottom,7)
-                        Spacer()
-                    }
-                    .frame(maxWidth: .infinity)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    ForEach(detailPlace.prices, id: \.place_id) { price in
+                    
+                    if(!detailPlace.prices.isEmpty) {
                         HStack{
-                            Image(systemName: (price.type == "souvenir" ? "bag.fill" : price.type == "entry" ?  "banknote" : price.type == "fnb" ? "fork.knife" : price.type == "kid" ? "figure.mixed.cardio" : price.type == "adult" ? "figure.arms.open" : "figure.walk"))
-                                .foregroundColor(.primary)
-                            Text(" \(price.type.capitalized)    : \(price.price)")
-
+                            Text("Price")
+                                .padding(.bottom,7)
                             Spacer()
-                            
                         }
-                        .padding(.bottom, 25)
+                        .frame(maxWidth: .infinity)
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        ForEach(detailPlace.prices, id: \.place_id) { price in
+                            HStack{
+                                Image(systemName: (price.type == "souvenir" ? "bag.fill" : price.type == "entry" ?  "banknote" : price.type == "fnb" ? "fork.knife" : price.type == "kid" ? "figure.mixed.cardio" : price.type == "adult" ? "figure.arms.open" : "figure.walk"))
+                                    .foregroundColor(.primary)
+                                Text(" \(price.type.capitalized)    : \(price.price)")
+                                
+                                Spacer()
+                                
+                            }
+                            .padding(.bottom, 25)
+                        }
                     }
                     
                     VStack{
@@ -127,8 +130,8 @@ struct DetailActivityView: View {
                         ){
                             ForEach(detailPlace.interest, id:\.self) { interest in
                                 HStack {
-                                    Image(systemName: "pin")
-                                    Text("\(interest)".capitalized)
+                                    Image(systemName: interestIcons[interest] ?? "pin")
+                                    Text(interestDict[interest]?.capitalized ?? interest)
                                 }
                             }
                         }
@@ -162,11 +165,11 @@ struct DetailActivityView: View {
                                 Text(String(removeTrailingZero(detailPlace.reviews.first?.rating ?? 5.0)))
                             }
                             Spacer()
-                            Text(detailPlace.reviews.first?.description ?? "lor")
+                            Text(detailPlace.reviews.first?.description ?? "Description")
                                 .lineLimit(reviewExpanded ? nil : 3)
                             HStack{
                                 Spacer()
-                                NavigationLink(destination:ReviewExpandedView(review: detailPlace.reviews.first ?? ReviewAdapter(id: "r1", place_id: "p1", name: "toreto", description: "lorem", rating: 5.0))){
+                                NavigationLink(destination:ReviewExpandedView(review: detailPlace.reviews.first ?? ReviewAdapter(id: "R1", place_id: "P1", name: "Name", description: "Review Description", rating: 5.0))){
                                     Text("more")
                                 }
                             }
@@ -190,7 +193,10 @@ struct DetailActivityView: View {
                                 .italic()
                                 .padding(.horizontal, 16)
                                 .multilineTextAlignment(.leading)
-                            MapView(coordinate: CLLocationCoordinate2D(latitude: detailPlace.latitude, longitude: detailPlace.longitude))
+                            MapView(
+                                name: detailPlace.name,
+                                coordinate: CLLocationCoordinate2D(latitude: detailPlace.latitude, longitude: detailPlace.longitude)
+                            )
                                 .frame(height: 150)
                                 .cornerRadius(10)
                                 .padding(.horizontal, 16)

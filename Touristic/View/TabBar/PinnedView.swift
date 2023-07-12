@@ -43,27 +43,29 @@ struct PinnedView: View {
                 else {
                     List{
                         Section {
-                            ForEach(filteredTripList, id: \.self) { trip in
-                                NavigationLink(destination: TripActivityView(trip: trip)) {
-                                    HStack {
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 60, height: 60)
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .clipped()
-                                        VStack(alignment: .leading) {
-                                            Text(trip.name ?? "Trip Name")
-                                            Text(activityCountFormatter(count: trip.places?.count ?? 0))
+                            LazyVStack {
+                                ForEach(filteredTripList, id: \.self) { trip in
+                                    NavigationLink(destination: TripActivityView(trip: trip)) {
+                                        HStack {
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                .clipped()
+                                            VStack(alignment: .leading) {
+                                                Text(trip.name ?? "Trip Name")
+                                                Text(activityCountFormatter(count: trip.places?.count ?? 0))
+                                            }
+                                            .padding(.horizontal, 10)
+                                            Spacer()
                                         }
-                                        .padding(.horizontal, 10)
-                                        Spacer()
+                                        .padding(.vertical, 14)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
                                     }
-                                    .padding(.vertical, 14)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                                 }
+                                .onDelete(perform: deleteTrip)
                             }
-                            .onDelete(perform: deleteTrip)
                         }
                     header: { Text("") }
                     }
