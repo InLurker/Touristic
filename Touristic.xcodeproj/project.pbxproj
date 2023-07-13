@@ -33,6 +33,7 @@
 		7DE43E132A4ED8EF00A33892 /* InterestDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E122A4ED8EF00A33892 /* InterestDict.swift */; };
 		7DE43E1B2A52047E00A33892 /* SelectedInterestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE43E1A2A52047E00A33892 /* SelectedInterestData.swift */; };
 		7DFDC2A32A5C162200C566E3 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 7DFDC2A22A5C162200C566E3 /* ExpandableText */; };
+		7DFDC2A72A5FF7F600C566E3 /* TripThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFDC2A62A5FF7F600C566E3 /* TripThumbnail.swift */; };
 		DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */; };
 		DD8D93C42A56688A005CDD31 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D93C32A56688A005CDD31 /* MapView.swift */; };
 		DDA005932A499D510016476B /* FilterInterestModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA005922A499D510016476B /* FilterInterestModal.swift */; };
@@ -64,6 +65,7 @@
 		7DE43E102A4C3C7D00A33892 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		7DE43E122A4ED8EF00A33892 /* InterestDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestDict.swift; sourceTree = "<group>"; };
 		7DE43E1A2A52047E00A33892 /* SelectedInterestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedInterestData.swift; sourceTree = "<group>"; };
+		7DFDC2A62A5FF7F600C566E3 /* TripThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripThumbnail.swift; sourceTree = "<group>"; };
 		DD6AB5982A4E84680040B666 /* AddToTripListModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToTripListModal.swift; sourceTree = "<group>"; };
 		DD8D93C32A56688A005CDD31 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		DDA005922A499D510016476B /* FilterInterestModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInterestModal.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				7D0D9DC12A49936100843298 /* TripsData.xcdatamodeld */,
 				7DE43E102A4C3C7D00A33892 /* DataController.swift */,
 				7DE43E1A2A52047E00A33892 /* SelectedInterestData.swift */,
+				7DFDC2A62A5FF7F600C566E3 /* TripThumbnail.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				21DDA1602A49754200048135 /* TripNameData.swift in Sources */,
 				21DDA16A2A49AFC000048135 /* DetailReviewView.swift in Sources */,
 				7DE43E132A4ED8EF00A33892 /* InterestDict.swift in Sources */,
+				7DFDC2A72A5FF7F600C566E3 /* TripThumbnail.swift in Sources */,
 				7D265A322A4997E30025B785 /* PlacesCardView.swift in Sources */,
 				7D0D9DBE2A496F8F00843298 /* TabBarView.swift in Sources */,
 				DD6AB5992A4E84680040B666 /* AddToTripListModal.swift in Sources */,

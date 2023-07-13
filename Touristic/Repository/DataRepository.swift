@@ -22,6 +22,7 @@ class DataRepository {
         
         let trip = Trip(context: context)
         trip.name = uniqueName
+        trip.dateUpdated = Date()
         
         do {
             try context.save()
@@ -44,11 +45,12 @@ class DataRepository {
         }
     }
     
-    func addPlaceToTrip(context: NSManagedObjectContext, trip: Trip, placeID: String) -> Bool {
+    func addPlaceToTrip(context: NSManagedObjectContext, trip: Trip, placeID: String, place_thumbnail: String) -> Bool {
         let place = Place(context: context)
         place.place_id = placeID
-        
+        place.thumbnail = place_thumbnail
         trip.addToPlaces(place)
+        trip.dateUpdated = Date()
         do {
             try context.save()
             return true
@@ -67,7 +69,6 @@ class DataRepository {
         if let placeToRemove = places.first(where: { $0.place_id == placeID }) {
             trip.removeFromPlaces(placeToRemove)
             context.delete(placeToRemove)
-            
             do {
                 try context.save()
                 return true

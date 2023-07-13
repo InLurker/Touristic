@@ -13,6 +13,7 @@ struct AddToTripListModal: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @State var place_id : String
+    @State var place_thumbnail: String
     @State private var isShowingNewTripModal = false
     @State private var showAlert = false
     
@@ -22,7 +23,7 @@ struct AddToTripListModal: View {
     @FetchRequest(
         entity: Trip.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Trip.objectID, ascending: false)
+            NSSortDescriptor(keyPath: \Trip.dateUpdated, ascending: false)
         ]
     ) var tripList: FetchedResults<Trip>
     
@@ -43,12 +44,39 @@ struct AddToTripListModal: View {
                 .frame(height: 40) // Adjust the height as needed
                 ForEach(tripList, id: \.self) { trip in
                     HStack {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 60, height: 60)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .clipped()
+                        
+                        AsyncImage(url: URL(string: trip.derivedThumbnail ?? "")) { phase in
+                            switch phase {
+                            case .empty:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .clipped()
+                            case .success(let image):
+                                image.resizable()
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .clipped()
+                            case .failure:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .clipped()
+                            @unknown default:
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 60, height: 60)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .clipped()
+                            }
+                        }
                         
                         VStack(alignment: .leading) {
                             Text(trip.name ?? "Trip Name")
@@ -129,7 +157,7 @@ struct AddToTripListModal: View {
         
         
         tripsToAdd.forEach { trip in
-            let success = DataRepository.shared.addPlaceToTrip(context: viewContext, trip: trip, placeID: place_id)
+            let success = DataRepository.shared.addPlaceToTrip(context: viewContext, trip: trip, placeID: place_id, place_thumbnail: place_thumbnail)
             if !success {
                 AlertKitAPI.present(
                     title: "An error ocurred while saving.",

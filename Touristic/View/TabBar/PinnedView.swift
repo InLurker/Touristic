@@ -13,7 +13,7 @@ struct PinnedView: View {
     @FetchRequest(
         entity: Trip.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \Trip.objectID, ascending: false)
+            NSSortDescriptor(keyPath: \Trip.dateUpdated, ascending: false)
         ]
     ) var trips: FetchedResults<Trip>
     
@@ -46,26 +46,58 @@ struct PinnedView: View {
                             ForEach(filteredTripList, id: \.self) { trip in
                                 NavigationLink(destination: TripActivityView(trip: trip)) {
                                     HStack {
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 60, height: 60)
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .clipped()
+                                        AsyncImage(url: URL(string: trip.derivedThumbnail ?? "")) { phase in
+                                            switch phase {
+                                            case .empty:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 70, height: 70)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .clipped()
+                                            case .success(let image):
+                                                image.resizable()
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 70, height: 70)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .clipped()
+                                            case .failure:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 70, height: 70)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .clipped()
+                                            @unknown default:
+                                                Image(systemName: "photo")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 70, height: 70)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                                    .clipped()
+                                            }
+                                        }
                                         VStack(alignment: .leading) {
                                             Text(trip.name ?? "Trip Name")
+                                                .font(.headline)
+                                                .lineLimit(1)
+                                                .fontWeight(.medium)
+                                            Spacer()
+                                                .frame(maxHeight: 8)
                                             Text(activityCountFormatter(count: trip.places?.count ?? 0))
+                                                .font(.footnote)
                                         }
-                                        .padding(.horizontal, 10)
+                                        .padding(.horizontal, 5)
                                         Spacer()
                                     }
-                                    .padding(.vertical, 14)
+                                    .padding(.vertical, 5)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                 }
                             }
-                        .onDelete(perform: deleteTrip)
-                    }
-                    header: { Text("") }
+                            .onDelete(perform: deleteTrip)
+                        }
+                        header: { Text("") }
                     }
                     .listStyle(.insetGrouped)
                 }

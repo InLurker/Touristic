@@ -223,7 +223,8 @@ struct DetailActivityView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .sheet(isPresented: $isShowAddToTripModal) {
             AddToTripListModal(
-                place_id: detailPlace.place_id
+                place_id: detailPlace.place_id,
+                place_thumbnail: detailPlace.images.first ?? ""
             )
             .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
             .presentationDragIndicator(.automatic)

@@ -22,6 +22,7 @@ struct ReviewExpandedView: View {
                     }
                     Spacer()
                     Text(review.description)
+                        .multilineTextAlignment(.leading)
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity)

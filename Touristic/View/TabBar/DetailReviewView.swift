@@ -19,7 +19,7 @@ struct DetailReviewView: View {
                     ForEach(reviews, id: \.id){
                         review in
                         NavigationLink(destination: ReviewExpandedView(review: review)){
-                            VStack{
+                            VStack(alignment: .leading){
                                 HStack{
                                     Text(review.name)
                                     Spacer()
@@ -34,7 +34,7 @@ struct DetailReviewView: View {
                                     .multilineTextAlignment(.leading)
                                 HStack{
                                     Spacer()
-                                    NavigationLink(destination:ReviewExpandedView(review: review )){
+                                    NavigationLink(destination:ReviewExpandedView(review: review)){
                                         Text("more")
                                     }
                                 }

@@ -151,14 +151,14 @@ struct PlacesCardView: View {
                             .cornerRadius(10)
                             .opacity(0.4)
                             .clipped()
-                        
                     }
                 }
             }
         }
         .sheet(isPresented: $isShowAddToTripModal) {
             AddToTripListModal(
-                place_id: placeID
+                place_id: placeID,
+                place_thumbnail: images.first ?? ""
             )
             .presentationDetents([.height(UIScreen.main.bounds.size.height / 2) , .medium, .large])
             .presentationDragIndicator(.automatic)
