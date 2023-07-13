@@ -15,7 +15,7 @@ struct ReviewExpandedView: View {
                 VStack(alignment: .leading){
                     HStack{
                         Text(review.name)
-                            .bold()
+                            .fontWeight(.medium)
                         Spacer()
                         Image(systemName: "star.fill")
                         Text(String(removeTrailingZero(review.rating)))

@@ -159,7 +159,7 @@ struct DetailActivityView: View {
                         VStack(alignment: .leading) {
                             HStack{
                                 Text(detailPlace.reviews.first?.name ?? "Review name")
-                                    .bold()
+                                    .fontWeight(.medium)
                                 Spacer()
                                 Image(systemName: "star.fill")
                                 Text(String(removeTrailingZero(detailPlace.reviews.first?.rating ?? 5.0)))

@@ -22,6 +22,7 @@ struct DetailReviewView: View {
                             VStack(alignment: .leading){
                                 HStack{
                                     Text(review.name)
+                                        .fontWeight(.medium)
                                     Spacer()
                                     Image(systemName: "star.fill")
                                     Text(removeTrailingZero(review.rating))
