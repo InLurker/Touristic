@@ -56,22 +56,20 @@ struct TripActivityView: View {
                             }
                         }
                     } else {
-                        NavigationStack {
-                            ScrollView {
-                                LazyVStack(alignment: .leading, spacing: 14) {
-                                    ForEach(placeAdapters, id: \.place_id) { place in
-                                        NavigationLink(destination: DetailActivityView(detailPlace: place)) {
-                                            PlacesCardView(place: place)
-                                        }
-                                        .foregroundColor(.primary)
+                        ScrollView {
+                            LazyVStack(alignment: .leading, spacing: 14) {
+                                ForEach(placeAdapters, id: \.place_id) { place in
+                                    NavigationLink(destination: DetailActivityView(detailPlace: place)) {
+                                        PlacesCardView(place: place)
                                     }
+                                    .foregroundColor(.primary)
                                 }
-                                .onChange(of: Array(placesInList)) { _ in
-                                    retrievePlacesInList()
-                                }
-                                .padding(.vertical, 14)
-                                .padding(.horizontal, 25)
                             }
+                            .onChange(of: Array(placesInList)) { _ in
+                                retrievePlacesInList()
+                            }
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 25)
                         }
                     }
                 }
