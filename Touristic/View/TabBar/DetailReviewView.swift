@@ -27,11 +27,11 @@ struct DetailReviewView: View {
                                     Image(systemName: "star.fill")
                                     Text(removeTrailingZero(review.rating))
                                 }
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 Spacer()
                                 Text(review.description)
                                     .lineLimit(reviewExpanded ? nil : 3)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.primary)
                                     .multilineTextAlignment(.leading)
                                 HStack{
                                     Spacer()

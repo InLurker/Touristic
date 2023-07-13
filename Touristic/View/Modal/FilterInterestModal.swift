@@ -47,22 +47,19 @@ struct FilterInterestModal: View {
                     }
                     .foregroundColor(.blue)
                 }
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color(UIColor.systemGray6))
-                    .frame(height:36)
-                    .overlay(
-                        HStack{
-                            TextField("Search Location", text: $destination)
-                            Button(action:{
-                                dismiss()
-                            }){
-                                Image(systemName: "paperplane.circle")
-                                    .font(.title2)
-                            }
-                        }
-                            .padding(.horizontal,10)
-                    )
-                
+                HStack{
+                    TextField("Search Location", text: $destination)
+                    Button(action:{
+                        dismiss()
+                    }){
+                        Image(systemName: "paperplane.circle")
+                            .font(.title2)
+                    }
+                }
+                .padding(.horizontal,10)
+                .frame(height: 36)
+                .background(Color(UIColor.systemGray5))
+                .cornerRadius(10)
                 Text("Interest")
                     .font(.title2)
                     .fontWeight(.bold)
