@@ -45,7 +45,7 @@ struct FilterInterestModal: View {
                     .onTapGesture {
                         dismiss()
                     }
-                    .foregroundColor(.blue)
+                    .foregroundColor(.accentColor)
                 }
                 HStack{
                     TextField("Search Location", text: $destination)

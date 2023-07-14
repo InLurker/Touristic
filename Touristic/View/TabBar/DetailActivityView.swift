@@ -99,7 +99,7 @@ struct DetailActivityView: View {
                         .frame(maxWidth: .infinity)
                         .font(.title2)
                         .fontWeight(.bold)
-                        ForEach(detailPlace.prices, id: \.place_id) { price in
+                        ForEach(detailPlace.prices, id: \.id) { price in
                             HStack{
                                 Image(systemName: (price.type == "souvenir" ? "bag.fill" : price.type == "entry" ?  "banknote" : price.type == "fnb" ? "fork.knife" : price.type == "kid" ? "figure.mixed.cardio" : price.type == "adult" ? "figure.arms.open" : "figure.walk"))
                                     .foregroundColor(.primary)

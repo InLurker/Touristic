@@ -112,6 +112,7 @@ struct PlacesCardView: View {
                 }
             }
             .padding(5)
+            .zIndex(2)
             GeometryReader { geometry in
                 AsyncImage(url: URL(string: images.first ?? "")) { phase in
                     switch phase {
@@ -154,6 +155,7 @@ struct PlacesCardView: View {
                     }
                 }
             }
+            .zIndex(1)
         }
         .sheet(isPresented: $isShowAddToTripModal) {
             AddToTripListModal(
